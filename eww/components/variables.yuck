@@ -1,0 +1,9 @@
+;; Workspace variables
+(defpoll current_workspace :interval "100ms" "hyprctl activeworkspace -j | jq -r '.id'")
+;; Volume variables
+(defpoll volume :interval "100ms" "pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\\d+%' | head -1 | tr -d '%'")
+(defpoll volume_muted :interval "100ms" "pactl get-sink-mute @DEFAULT_SINK@ | grep -q 'yes' && echo 'true' || echo 'false'")
+;; Battery variables
+(defpoll battery_percent :interval "5s" "cat /sys/class/power_supply/BAT0/capacity")
+(defpoll battery_status :interval "1s" "cat /sys/class/power_supply/BAT0/status")
+(defpoll battery_charging_frame :interval "500ms" "echo $(( ($(date +%s) / 1) % 5 ))")

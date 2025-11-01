@@ -1,0 +1,34 @@
+(defwidget workspaces []
+  (box
+    :class "widget top-left workspaces"
+    :orientation "h"
+    :space-evenly false
+    :halign "start"
+    (button 
+      :class "workspace ${current_workspace == "1" ? "active" : ""}"
+      :onclick "hyprctl dispatch workspace 1"
+      ""
+    )
+    (button
+      :class "workspace ${current_workspace == "2" ? "active" : ""}"
+      :onclick "hyprctl dispatch workspace 2"
+      ""
+    )
+    (button
+      :class "workspace ${current_workspace == "3" ? "active" : ""}"
+      :onclick "hyprctl dispatch workspace 3"
+      ""
+    )
+    (button
+      :class "workspace ${current_workspace == "4" ? "active" : ""}"
+      :onclick "hyprctl dispatch workspace 4"
+      ""
+    )
+    (button
+      :class "workspace ${current_workspace == "5" ? "active" : ""}"
+      :onclick "hyprctl dispatch workspace 5"
+      ""
+    )
+  )
+)
+

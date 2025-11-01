@@ -1,0 +1,54 @@
+;; Volume button widget
+(defwidget volume_button []
+  (button 
+    :class "volume-button"
+    :onclick "eww open --toggle volume-popup"
+    (label
+      :text "${volume_muted == 'true' ? '🔇' : volume >= 66 ? '🔊' : volume >= 33 ? '🔉' : '🔈'}"
+    )
+  )
+)
+
+;; Volume popup widget
+(defwidget volume_popup []
+  (box
+    :class "volume-popup"
+    :orientation "v"
+    :space-evenly false
+    (box 
+      :class "volume-controls"
+      :orientation "h"
+      :space-evenly false
+      (button
+        :class "volume-mute-button"
+        :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        (label 
+          :text "${volume_muted == 'true' ? '🔇' : '🔊'}"
+        )
+      )
+      (scale
+        :class "volume-slider"
+        :value volume
+        :min 0
+        :max 100
+        :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
+      )
+    )
+  )
+)
+
+;; Volume popup window
+(defwindow volume-popup
+  :monitor 0
+  :geometry (geometry
+    :x "5px"
+    :y "5px"
+    :width "250px"
+    :anchor "top right"
+  )
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (volume_popup)
+)
+

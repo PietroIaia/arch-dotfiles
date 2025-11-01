@@ -1,0 +1,14 @@
+(include "./components/workspaces.yuck")
+(include "./components/settings.yuck")
+
+;; Main bar widget
+(defwidget bar []
+  (centerbox 
+    :orientation "h"
+    :class "taskbar"
+    (workspaces)
+    (box)
+    (settings)
+  )
+)
+

@@ -1,0 +1,17 @@
+(include "./components/volume.yuck")
+(include "./components/battery.yuck")
+(include "./components/clock.yuck")
+
+;; Settings widget
+(defwidget settings []
+  (box 
+    :class "widget top-right"
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    (volume_button)
+    (battery)
+    (clock)
+  )
+)
+

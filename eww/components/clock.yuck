@@ -1,0 +1,13 @@
+;; Clock widget
+(defwidget clock []
+  (box 
+    :class "clock"
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    (label 
+      :text "${formattime(EWW_TIME, "%I:%M%p")}"
+    )
+  )
+)
+

@@ -1,0 +1,159 @@
+* {
+  all: unset;
+}
+
+$background-color: rgba(88,67,113,.50);
+$overlay-background-color: rgba(88,67,113,.30);
+$border-color: #ffffff;
+$border-radius: 8px;
+
+.taskbar {
+  font-size: 12px;
+}
+
+.widget {
+  background-color: $background-color;
+  border-top: 2px solid $border-color;
+  border-bottom: 2px solid $border-color;
+}
+
+.widget.top-right {
+  border-left: 2px solid $border-color;
+  border-radius: $border-radius 0px 0px $border-radius;
+  padding-left: 10px;
+}
+
+.widget.top-left {
+  border-right: 2px solid $border-color;
+  border-radius: 0px $border-radius $border-radius 0px;
+  padding-right: 10px;
+}
+.workspaces {
+  padding: 5px;
+}
+
+.workspace {
+  background-color: transparent;
+  border: 1px solid $border-color;
+  border-radius: 50%;
+  min-width: 17px;
+  min-height: 5px;
+  margin: 0 2px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.workspace.active {
+  background-color: #cd9ae5;
+}
+
+.workspace:hover {
+  background-color: #cd9ae5; 
+}
+
+.system {
+  padding: 5px 10px;
+}
+
+.system label {
+  margin: 0 5px;
+  font-size: 14px;
+}
+
+.clock {
+  padding: 5px 10px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.clock label {
+  font-size: 14px;
+}
+
+.volume-button {
+  background-color: transparent;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.volume-button:hover {
+  background-color: #7a5a95;
+}
+
+.volume-popup {
+  background-color: $overlay-background-color;
+  border: 2px solid $border-color;
+  border-radius: $border-radius;
+  padding: 15px;
+}
+
+.volume-controls {
+  padding: 5px 0;
+}
+
+.volume-mute-button {
+  background-color: transparent;
+  padding: 5px;
+  margin-right: 10px;
+  font-size: 20px;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: $border-radius;
+}
+
+.volume-mute-button:hover {
+  background-color: #7a5a95;
+}
+
+.volume-slider {
+  min-height: 8px;
+  min-width: 180px;
+}
+
+.volume-slider trough {
+  background-color: #3d2f50;
+  border-radius: $border-radius;
+  min-height: 8px;
+}
+
+.volume-slider highlight {
+  background-color: #cd9ae5;
+  border-radius: 10px;
+}
+
+.volume-slider slider {
+  background-color: #dcc2ff;
+  border-radius: 100px;
+  min-width: 16px;
+  min-height: 16px;
+  margin-right: 16px;
+}
+
+.battery {
+  padding: 5px 10px;
+}
+
+.battery label {
+  margin: 0 3px;
+  font-size: 14px;
+}
+
+.battery-icon {
+  font-size: 16px;
+}
+
+.battery-icon.full {
+  color: #2ECC71;
+}
+
+.battery-icon.half {
+  color: #F1C40F;
+}
+
+.battery-icon.low {
+  color: #E74C3C;
+}
+
+.battery-icon.charging {
+  color: orange;
+}
