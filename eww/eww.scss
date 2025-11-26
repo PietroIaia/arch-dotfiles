@@ -157,3 +157,150 @@ $border-radius: 8px;
 .battery-icon.charging {
   color: orange;
 }
+
+/* Network/WiFi widget styles */
+.network-button {
+  background-color: transparent;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: #0fcbf1;
+}
+
+.network-button:hover {
+  background-color: #7a5a95;
+}
+
+.network-popup {
+  background-color: $overlay-background-color;
+  border: 2px solid $border-color;
+  border-radius: $border-radius;
+  padding: 15px;
+  min-width: 300px;
+}
+
+.network-header {
+  padding-bottom: 10px;
+}
+
+.network-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.network-toggle {
+  background-color: transparent;
+  padding: 5px 10px;
+  font-size: 18px;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  transition: all 0.2s ease;
+}
+
+.network-toggle.enabled {
+  color: #2ECC71;
+  border-color: #2ECC71;
+}
+
+.network-toggle.disabled {
+  color: #E74C3C;
+  border-color: #E74C3C;
+}
+
+.network-toggle:hover {
+  background-color: #7a5a95;
+}
+
+.network-status {
+  padding: 10px 0;
+}
+
+.network-current-label {
+  font-size: 12px;
+  color: #b8b8b8;
+  margin-bottom: 5px;
+}
+
+.network-current {
+  background-color: rgba(205, 154, 229, 0.2);
+  border: 1px solid #cd9ae5;
+  border-radius: $border-radius;
+  padding: 8px 12px;
+}
+
+.network-current-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.network-current-strength {
+  font-size: 14px;
+  color: #cd9ae5;
+}
+
+.network-separator {
+  min-height: 1px;
+  background-color: $border-color;
+  margin: 10px 0;
+}
+
+.network-list {
+  padding-top: 5px;
+}
+
+.network-list-label {
+  font-size: 12px;
+  color: #b8b8b8;
+  margin-bottom: 8px;
+}
+
+.network-item {
+  margin: 2px 0;
+}
+
+.network-item.connected {
+  opacity: 0.5;
+}
+
+.network-connect {
+  background-color: transparent;
+  padding: 8px 10px;
+  border-radius: $border-radius;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.network-connect:hover {
+  background-color: #7a5a95;
+  border-color: $border-color;
+}
+
+.network-icon {
+  font-size: 14px;
+  color: #0fcbf1;
+  margin-right: 15px;
+}
+
+.network-name {
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.network-lock {
+  font-size: 12px;
+  margin: 0 5px;
+}
+
+.network-signal {
+  font-size: 12px;
+  color: #cd9ae5;
+}
+
+.network-disabled-msg {
+  font-size: 14px;
+  color: #b8b8b8;
+  padding: 20px;
+}

@@ -7,3 +7,20 @@
 (defpoll battery_percent :interval "5s" "cat /sys/class/power_supply/BAT0/capacity")
 (defpoll battery_status :interval "1s" "cat /sys/class/power_supply/BAT0/status")
 (defpoll battery_charging_frame :interval "500ms" "echo $(( ($(date +%s) / 1) % 5 ))")
+;; Network/WiFi variables
+(defpoll wifi_enabled :interval "2s" "nmcli radio wifi")
+(defpoll wifi_connected :interval "2s" "nmcli -t -f DEVICE,TYPE,STATE device | grep -q 'wifi:connected' && echo 'yes' || echo 'no'")
+(defpoll wifi_ssid :interval "2s" "nmcli -t -f active,ssid device wifi | grep '^yes' | cut -d':' -f2")
+(defpoll wifi_strength :interval "2s" "nmcli -t -f active,signal device wifi | grep '^yes' | cut -d':' -f2")
+(defpoll wifi_networks :interval "5s"
+  `echo "(box :orientation \\"v\\" :space-evenly false" && nmcli -t -f SSID,SIGNAL,SECURITY device wifi list | awk -F: 'length($1) > 0' | head -n 10 | awk -F: '
+    {
+      ssid = $1;
+      signal = $2;
+      security = $3;
+      icon = (signal >= 75) ? "󰤨" : (signal >= 50) ? "󰤥" : (signal >= 25) ? "󰤢" : "󰤟";
+      lock = (security != "") ? "🔒" : "";
+      printf "(box :class \\"network-item\\" :orientation \\"h\\" :space-evenly true (button :class \\"network-connect\\" :onclick \\"nmcli device wifi connect %s\\" (box :orientation \\"h\\" :space-evenly false (label :class \\"network-icon\\" :text \\"%s\\") (label :class \\"network-lock\\" :text \\"%s\\") (label :class \\"network-name\\" :text \\"%s\\" :halign \\"start\\" :hexpand true) (label :class \\"network-signal\\" :text \\"%d%%\\"))))", ssid, icon, ssid, lock, signal;
+    }
+  ' && echo ")"`
+)
