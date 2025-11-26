@@ -1,0 +1,18 @@
+[package]
+name = "niflveil"
+version = "0.1.0"
+edition = "2021"
+authors = ["Maui_The_Magnificent"]
+description = "A window minimizer for Hyprland"
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[build]
+rustflags = ["-C", "target-cpu=native"]

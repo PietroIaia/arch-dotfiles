@@ -1,0 +1,128 @@
+;; Network/WiFi Widget
+;; Displays WiFi status in the bar and provides a popup with connection details
+
+;; Main WiFi button widget that appears in the settings bar
+(defwidget wifi_button []
+  (button
+    :class "network-button"
+    :onclick "eww open --toggle network-popup"
+    (label 
+      :text "${wifi_enabled == 'enabled' ?
+        wifi_connected == 'yes' ?
+        wifi_strength >= 75 ? '󰤨' :
+        wifi_strength >= 50 ? '󰤥' :
+        wifi_strength >= 25 ? '󰤢' : '󰤟'
+      :
+        '📡'
+      : 
+        '✈️'
+      }"
+    )
+  )
+)
+
+;; Popup widget with network details and controls
+(defwidget network_popup []
+  (box
+    :class "network-popup"
+    :orientation "v"
+    :space-evenly false
+
+    ;; Header with WiFi toggle
+    (box
+      :class "network-header"
+      :orientation "h"
+      :space-evenly false
+      (label
+        :class "network-title"
+        :text "WiFi"
+        :halign "start"
+        :hexpand true
+      )
+      (button
+        :class "network-toggle ${wifi_enabled == 'enabled' ? 'enabled' : 'disabled'}"
+        :onclick "nmcli radio wifi ${wifi_enabled == 'enabled' ? 'off' : 'on'}"
+        (label :text "${wifi_enabled == 'enabled' ? '●' : '○'}")
+      )
+    )
+
+    ;; Current connection status
+    (box
+      :class "network-status"
+      :orientation "v"
+      :space-evenly false
+      :visible "${wifi_enabled == 'enabled' && wifi_connected == 'yes'}"
+
+      (label
+        :class "network-current-label"
+        :text "Connected to"
+        :halign "start"
+      )
+      (box
+        :class "network-current"
+        :orientation "h"
+        :space-evenly false
+        (label
+          :class "network-current-name"
+          :text "${wifi_ssid}"
+          :halign "start"
+          :hexpand true
+        )
+        (label
+          :class "network-current-strength"
+          :text "${wifi_strength}%"
+          :halign "end"
+        )
+      )
+    )
+
+    ;; Separator
+    (box
+      :class "network-separator"
+      :visible "${wifi_enabled == 'enabled'}"
+    )
+
+    ;; Available networks list
+    (box
+      :class "network-list"
+      :orientation "v"
+      :space-evenly false
+      :visible "${wifi_enabled == 'enabled'}"
+
+      (label
+        :class "network-list-label"
+        :text "Available Networks"
+        :halign "start"
+      )
+
+      (scroll
+        :vscroll true
+        :hscroll false
+        :height 200
+        (literal :content wifi_networks)
+      )
+    )
+
+    ;; Disconnected message
+    (label
+      :class "network-disabled-msg"
+      :text "${wifi_enabled == 'disabled' ? 'WiFi is disabled' : 'Not connected'}"
+      :visible "${wifi_enabled == 'disabled' || wifi_connected == 'no'}"
+    )
+  )
+)
+
+;; Popup window definition
+(defwindow network-popup
+  :monitor 0
+  :geometry (geometry
+    :x "5px"
+    :y "5px"
+    :width "300px"
+    :anchor "top right"
+  )
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (network_popup)
+)
