@@ -1,5 +1,5 @@
-(include "./components/workspaces.yuck")
-(include "./components/settings.yuck")
+(include "./bar/components/workspaces.yuck")
+(include "./bar/components/settings.yuck")
 
 ;; Main bar widget
 (defwidget bar []

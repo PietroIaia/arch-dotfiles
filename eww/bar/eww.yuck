@@ -1,5 +1,5 @@
-(include "./components/variables.yuck")
-(include "./components/bar.yuck")
+(include "./bar/components/variables.yuck")
+(include "./bar/components/bar.yuck")
 
 ;; Window definition
 (defwindow bar

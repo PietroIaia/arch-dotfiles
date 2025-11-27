@@ -1,7 +1,7 @@
-(include "./components/network.yuck")
-(include "./components/volume.yuck")
-(include "./components/battery.yuck")
-(include "./components/clock.yuck")
+(include "./bar/components/network.yuck")
+(include "./bar/components/volume.yuck")
+(include "./bar/components/battery.yuck")
+(include "./bar/components/clock.yuck")
 
 ;; Settings widget
 (defwidget settings []
