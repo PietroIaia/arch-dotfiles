@@ -2,5 +2,8 @@
 
 !/.gitignore
 !/eww
+!/eww/**
 !/hypr
+!/hypr/**
 !/niflveil
+!/niflveil/**
