@@ -3,7 +3,7 @@
 }
 
 $background-color: rgba(88,67,113,.50);
-$overlay-background-color: rgba(88,67,113,.30);
+$overlay-background-color: rgba(88,67,113,.70);
 $border-color: #ffffff;
 $border-radius: 8px;
 
@@ -303,4 +303,89 @@ $border-radius: 8px;
   font-size: 14px;
   color: #b8b8b8;
   padding: 20px;
+}
+
+/* Power overlay styles */
+.power-button {
+  background-color: transparent;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: #E74C3C;
+}
+
+.power-button:hover {
+  background-color: #7a5a95;
+}
+
+.power-overlay-container {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.power-overlay {
+  background-color: $overlay-background-color;
+  border: 2px solid $border-color;
+  border-radius: $border-radius;
+  padding: 20px;
+  min-width: 350px;
+}
+
+.power-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 10px;
+}
+
+.power-separator {
+  min-height: 1px;
+  background-color: $border-color;
+  margin: 10px 0;
+}
+
+.power-options {
+  padding: 10px 0;
+}
+
+.power-row {
+  margin: 5px 0;
+}
+
+.power-option {
+  background-color: transparent;
+  border: 2px solid $border-color;
+  border-radius: $border-radius;
+  padding: 20px;
+  margin: 5px;
+  min-width: 140px;
+}
+
+.power-option:hover {
+  background-color: #7a5a95;
+  border-color: #cd9ae5;
+}
+
+.power-icon {
+  font-size: 32px;
+  color: #cd9ae5;
+  margin-bottom: 8px;
+}
+
+.power-label {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.power-cancel {
+  background-color: transparent;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.power-cancel:hover {
+  background-color: #7a5a95;
 }

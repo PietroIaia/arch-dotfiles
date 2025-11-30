@@ -2,6 +2,7 @@
 (include "./bar/components/volume.yuck")
 (include "./bar/components/battery.yuck")
 (include "./bar/components/clock.yuck")
+(include "./bar/components/power.yuck")
 
 ;; Settings widget
 (defwidget settings []
@@ -14,6 +15,7 @@
     (battery)
     (wifi_button)
     (clock)
+    (power_button)
   )
 )
 

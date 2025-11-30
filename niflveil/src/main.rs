@@ -220,8 +220,6 @@ fn show_restore_menu() -> io::Result<()> {
 
     let eww_result = Command::new("eww")
         .args([
-            "--config",
-            "/etc/xdg/eww/widgets/niflveil/",
             "open",
             "niflveil",
         ])
@@ -235,15 +233,6 @@ fn show_restore_menu() -> io::Result<()> {
     } else {
         println!("Eww window opened successfully");
     }
-
-    Command::new("eww")
-        .args([
-            "--config",
-            "/etc/xdg/eww/widgets/niflveil/",
-            "close",
-            "niflveil",
-        ])
-        .output()?;
 
     Ok(())
 }
