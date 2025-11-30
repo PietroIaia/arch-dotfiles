@@ -31,6 +31,7 @@
     (scroll
       :vscroll true
       :hscroll false
+      :vexpand true
       (box
         :orientation "vertical"
         :space-evenly false
@@ -40,16 +41,11 @@
             :class "window-item"
             (box
               :space-evenly false
-              (label :text "${window.icon} ")
-              (label :text "${window.class}" :class "")
+              (label :text "${window.class}" :class "window-title")
             )
           )
         )
       )
     )    
-    (box
-      :class "footer"
-      :space-evenly false
-    )
   )
 )
