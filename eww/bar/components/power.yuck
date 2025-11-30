@@ -15,100 +15,92 @@
 ;; Power overlay widget with power options
 (defwidget power_overlay []
   (box
-    :class "power-overlay-container"
+    :class "power-overlay"
     :orientation "v"
     :space-evenly false
-    :valign "center"
-    :halign "center"
 
+    ;; Title
+    (label
+      :class "power-title"
+      :text "Power Options"
+    )
+
+    ;; Separator
+    (box :class "power-separator")
+
+    ;; Power options grid
     (box
-      :class "power-overlay"
+      :class "power-options"
       :orientation "v"
       :space-evenly false
 
-      ;; Title
-      (label
-        :class "power-title"
-        :text "Power Options"
-      )
-
-      ;; Separator
-      (box :class "power-separator")
-
-      ;; Power options grid
+      ;; Row 1: Shutdown and Reboot
       (box
-        :class "power-options"
-        :orientation "v"
-        :space-evenly false
+        :class "power-row"
+        :orientation "h"
+        :space-evenly true
 
-        ;; Row 1: Shutdown and Reboot
-        (box
-          :class "power-row"
-          :orientation "h"
-          :space-evenly true
-
-          (button
-            :class "power-option"
-            :onclick "eww close power-overlay && systemctl poweroff"
-            (box
-              :orientation "v"
-              :space-evenly false
-              (label :class "power-icon" :text "⏻")
-              (label :class "power-label" :text "Shutdown")
-            )
-          )
-
-          (button
-            :class "power-option"
-            :onclick "eww close power-overlay && systemctl reboot"
-            (box
-              :orientation "v"
-              :space-evenly false
-              (label :class "power-icon" :text "↻")
-              (label :class "power-label" :text "Reboot")
-            )
+        (button
+          :class "power-option"
+          :onclick "eww close power-overlay && systemctl poweroff"
+          (box
+            :orientation "v"
+            :space-evenly false
+            (label :class "power-icon" :text "⏻")
+            (label :class "power-label" :text "Shutdown")
           )
         )
 
-        ;; Row 2: Sleep and Logout
-        (box
-          :class "power-row"
-          :orientation "h"
-          :space-evenly true
-
-          (button
-            :class "power-option"
-            :onclick "eww close power-overlay && systemctl suspend"
-            (box
-              :orientation "v"
-              :space-evenly false
-              (label :class "power-icon" :text "⏾")
-              (label :class "power-label" :text "Sleep")
-            )
-          )
-
-          (button
-            :class "power-option"
-            :onclick "eww close power-overlay && hyprctl dispatch exit"
-            (box
-              :orientation "v"
-              :space-evenly false
-              (label :class "power-icon" :text "⎋")
-              (label :class "power-label" :text "Logout")
-            )
+        (button
+          :class "power-option"
+          :onclick "eww close power-overlay && systemctl reboot"
+          (box
+            :orientation "v"
+            :space-evenly false
+            (label :class "power-icon" :text "↻")
+            (label :class "power-label" :text "Reboot")
           )
         )
       )
 
-      ;; Separator
-      (box :class "power-separator")
+      ;; Row 2: Sleep and Logout
+      (box
+        :class "power-row"
+        :orientation "h"
+        :space-evenly true
 
-      ;; Cancel button
-      (button
-        :class "power-cancel"
-        :onclick "eww close power-overlay"
-        (label :text "Cancel")
+        (button
+          :class "power-option"
+          :onclick "eww close power-overlay && systemctl suspend"
+          (box
+            :orientation "v"
+            :space-evenly false
+            (label :class "power-icon" :text "⏾")
+            (label :class "power-label" :text "Sleep")
+          )
+        )
+
+        (button
+          :class "power-option"
+          :onclick "eww close power-overlay && hyprctl dispatch exit"
+          (box
+            :orientation "v"
+            :space-evenly false
+            (label :class "power-icon" :text "⎋")
+            (label :class "power-label" :text "Logout")
+          )
+        )
       )
+    )
+
+    ;; Separator
+    (box :class "power-separator")
+
+    ;; Cancel button
+    (button
+      :class "power-cancel"
+      :onclick "eww close power-overlay"
+      (label :text "Cancel")
     )
   )
 )
@@ -119,8 +111,8 @@
   :geometry (geometry
     :x "0%"
     :y "0%"
-    :width "100%"
-    :height "100%"
+    :width "20%"
+    :height "10%"
     :anchor "center"
   )
   :stacking "overlay"

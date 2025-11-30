@@ -317,16 +317,12 @@ $border-radius: 8px;
   background-color: #7a5a95;
 }
 
-.power-overlay-container {
-  background-color: rgba(0, 0, 0, 0.7);
-}
 
 .power-overlay {
   background-color: $overlay-background-color;
   border: 2px solid $border-color;
   border-radius: $border-radius;
   padding: 20px;
-  min-width: 350px;
 }
 
 .power-title {
