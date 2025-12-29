@@ -2,11 +2,13 @@
   all: unset;
 }
 
+$main-color: #cd9ae5;
 $background-color: rgba(58, 41, 135, .7);
 $overlay-background-color:rgba(58, 41, 135, .5);
 $hover-color: #7a5a95;
 $border-color: #ffffff;
 $border-radius: 8px;
+$icon-size: 16px;
 
 .taskbar {
   font-size: 12px;
@@ -21,7 +23,7 @@ $border-radius: 8px;
 }
 
 .widget-new.active {
-  background-color: #cd9ae5;
+  background-color: $main-color;
 }
 
 .widget-new:hover {
@@ -33,9 +35,13 @@ $border-radius: 8px;
   min-width: 17px;
 }
 
+.workspaces {
+  margin-left: 5px;
+}
+
 .volume-button {
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: $icon-size;
 }
 
 .volume-popup {
@@ -68,7 +74,7 @@ $border-radius: 8px;
 }
 
 .volume-slider highlight {
-  background-color: #cd9ae5;
+  background-color: $main-color;
   border-radius: $border-radius;
 }
 
@@ -76,50 +82,23 @@ $border-radius: 8px;
   min-height: 16px;
 }
 
-
-
-.widget {
-  background-color: $background-color;
-  border-top: 2px solid $border-color;
-  border-bottom: 2px solid $border-color;
-}
-
-.widget.top-right {
-  border-left: 2px solid $border-color;
-  border-radius: $border-radius 0px 0px $border-radius;
-  padding-left: 10px;
-}
-
-.widget.top-left {
-  border-right: 2px solid $border-color;
-  border-radius: 0px $border-radius $border-radius 0px;
-  padding-right: 10px;
-}
-
-.clock {
+.power-button {
+  margin-right: 5px;
   padding: 5px 10px;
-  font-weight: bold;
-  color: #ffffff;
+  font-size: $icon-size;
+  color: red;
 }
-
-.clock label {
-  font-size: 14px;
-}
-
-
-
 
 .battery {
   padding: 5px 10px;
 }
 
-.battery label {
-  margin: 0 3px;
-  font-size: 14px;
+.battery-label {
+  margin-left: 15px;
 }
 
 .battery-icon {
-  font-size: 16px;
+  font-size: $icon-size;
 }
 
 .battery-icon.full {
@@ -138,16 +117,29 @@ $border-radius: 8px;
   color: orange;
 }
 
+.clock {
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+
+
+
+.widget {
+  background-color: $background-color;
+  border-top: 2px solid $border-color;
+  border-bottom: 2px solid $border-color;
+}
+
 /* Network/WiFi widget styles */
 .network-button {
-  background-color: transparent;
-  padding: 5px 10px;
+  padding: 5px 15px 5px 10px;
   font-size: 16px;
   color: #0fcbf1;
 }
 
 .network-button:hover {
-  background-color: #7a5a95;
+  background-color: $hover-color;
 }
 
 .network-popup {
@@ -158,18 +150,14 @@ $border-radius: 8px;
   min-width: 300px;
 }
 
-.network-header {
-  padding-bottom: 10px;
-}
-
 .network-title {
-  font-size: 16px;
+  margin-left: 15px;
+  font-size: 12px;
   font-weight: bold;
   color: #ffffff;
 }
 
 .network-toggle {
-  background-color: transparent;
   padding: 5px 10px;
   font-size: 18px;
   min-width: 30px;
@@ -191,6 +179,7 @@ $border-radius: 8px;
 
 .network-toggle:hover {
   background-color: #7a5a95;
+  border-color: $border-color;
 }
 
 .network-status {
@@ -205,20 +194,21 @@ $border-radius: 8px;
 
 .network-current {
   background-color: rgba(205, 154, 229, 0.2);
-  border: 1px solid #cd9ae5;
+  border: 1px solid $main-color;
   border-radius: $border-radius;
   padding: 8px 12px;
+  margin-right: 5px;
 }
 
 .network-current-name {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   color: #ffffff;
 }
 
 .network-current-strength {
   font-size: 14px;
-  color: #cd9ae5;
+  color: $main-color;
 }
 
 .network-separator {
@@ -276,7 +266,7 @@ $border-radius: 8px;
 
 .network-signal {
   font-size: 12px;
-  color: #cd9ae5;
+  color: $main-color;
 }
 
 .network-disabled-msg {
@@ -286,15 +276,9 @@ $border-radius: 8px;
 }
 
 /* Power overlay styles */
-.power-button {
-  background-color: transparent;
-  padding: 5px 10px;
-  font-size: 16px;
-  color: #E74C3C;
-}
 
 .power-button:hover {
-  background-color: #7a5a95;
+  background-color: $hover-color;
 }
 
 
@@ -303,19 +287,6 @@ $border-radius: 8px;
   border: 2px solid $border-color;
   border-radius: $border-radius;
   padding: 20px;
-}
-
-.power-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ffffff;
-  padding: 10px;
-}
-
-.power-separator {
-  min-height: 1px;
-  background-color: $border-color;
-  margin: 10px 0;
 }
 
 .power-options {
@@ -336,13 +307,13 @@ $border-radius: 8px;
 }
 
 .power-option:hover {
-  background-color: #7a5a95;
-  border-color: #cd9ae5;
+  background-color: $hover-color;
+  border-color: $main-color;
 }
 
 .power-icon {
   font-size: 32px;
-  color: #cd9ae5;
+  color: $main-color;
   margin-bottom: 8px;
 }
 
@@ -350,19 +321,5 @@ $border-radius: 8px;
   font-size: 14px;
   color: #ffffff;
   font-weight: bold;
-}
-
-.power-cancel {
-  background-color: transparent;
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  padding: 10px 20px;
-  margin-top: 10px;
-  font-size: 14px;
-  color: #ffffff;
-}
-
-.power-cancel:hover {
-  background-color: #7a5a95;
 }
 

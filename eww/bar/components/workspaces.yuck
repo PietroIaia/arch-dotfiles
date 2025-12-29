@@ -1,5 +1,6 @@
 (defwidget workspaces []
   (box
+    :class "workspaces"
     :orientation "h"
     :space-evenly false
     :halign "start"

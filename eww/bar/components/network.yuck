@@ -4,19 +4,27 @@
 ;; Main WiFi button widget that appears in the settings bar
 (defwidget wifi_button []
   (button
-    :class "network-button"
+    :class "widget-new network-button"
     :onclick "eww open --toggle network-popup"
-    (label 
-      :text "${wifi_enabled == 'enabled' ?
-        wifi_connected == 'yes' ?
-        wifi_strength >= 75 ? '󰤨' :
-        wifi_strength >= 50 ? '󰤥' :
-        wifi_strength >= 25 ? '󰤢' : '󰤟'
-      :
-        '📡'
-      : 
-        '✈️'
-      }"
+    (box
+      :orientation "h"
+      :space-evenly false
+      (label 
+        :text "${wifi_enabled == 'enabled' ?
+          wifi_connected == 'yes' ?
+          wifi_strength >= 75 ? '󰤨' :
+          wifi_strength >= 50 ? '󰤥' :
+          wifi_strength >= 25 ? '󰤢' : '󰤟'
+        :
+          '📡'
+        : 
+          '✈️'
+        }"
+      )
+      (label
+        :class "network-title"
+        :text "${wifi_ssid}"
+      )
     )
   )
 )
@@ -27,41 +35,15 @@
     :class "network-popup"
     :orientation "v"
     :space-evenly false
-
-    ;; Header with WiFi toggle
     (box
-      :class "network-header"
       :orientation "h"
       :space-evenly false
-      (label
-        :class "network-title"
-        :text "WiFi"
-        :halign "start"
-        :hexpand true
-      )
-      (button
-        :class "network-toggle ${wifi_enabled == 'enabled' ? 'enabled' : 'disabled'}"
-        :onclick "nmcli radio wifi ${wifi_enabled == 'enabled' ? 'off' : 'on'}"
-        (label :text "${wifi_enabled == 'enabled' ? '●' : '○'}")
-      )
-    )
-
-    ;; Current connection status
-    (box
-      :class "network-status"
-      :orientation "v"
-      :space-evenly false
-      :visible "${wifi_enabled == 'enabled' && wifi_connected == 'yes'}"
-
-      (label
-        :class "network-current-label"
-        :text "Connected to"
-        :halign "start"
-      )
       (box
         :class "network-current"
         :orientation "h"
         :space-evenly false
+        :hexpand true
+        :visible "${wifi_enabled == 'enabled'}"
         (label
           :class "network-current-name"
           :text "${wifi_ssid}"
@@ -73,6 +55,12 @@
           :text "${wifi_strength}%"
           :halign "end"
         )
+      )
+      (button
+        :class "network-toggle ${wifi_enabled == 'enabled' ? 'enabled' : 'disabled'}"
+        :onclick "nmcli radio wifi ${wifi_enabled == 'enabled' ? 'off' : 'on'}"
+        :halign "end"
+        (label :text "${wifi_enabled == 'enabled' ? '●' : '○'}")
       )
     )
 

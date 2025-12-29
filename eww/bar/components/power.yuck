@@ -4,7 +4,7 @@
 ;; Main power button widget that appears in the settings bar
 (defwidget power_button []
   (button
-    :class "power-button"
+    :class "widget-new power-button"
     :onclick "eww open --toggle power-overlay"
     (label
       :text "⏻"
@@ -18,28 +18,14 @@
     :class "power-overlay"
     :orientation "v"
     :space-evenly false
-
-    ;; Title
-    (label
-      :class "power-title"
-      :text "Power Options"
-    )
-
-    ;; Separator
-    (box :class "power-separator")
-
-    ;; Power options grid
     (box
       :class "power-options"
       :orientation "v"
       :space-evenly false
-
-      ;; Row 1: Shutdown and Reboot
       (box
         :class "power-row"
         :orientation "h"
         :space-evenly true
-
         (button
           :class "power-option"
           :onclick "eww close power-overlay && systemctl poweroff"
@@ -50,7 +36,6 @@
             (label :class "power-label" :text "Shutdown")
           )
         )
-
         (button
           :class "power-option"
           :onclick "eww close power-overlay && systemctl reboot"
@@ -62,8 +47,6 @@
           )
         )
       )
-
-      ;; Row 2: Sleep and Logout
       (box
         :class "power-row"
         :orientation "h"
@@ -79,7 +62,6 @@
             (label :class "power-label" :text "Sleep")
           )
         )
-
         (button
           :class "power-option"
           :onclick "eww close power-overlay && hyprctl dispatch exit"
@@ -91,16 +73,6 @@
           )
         )
       )
-    )
-
-    ;; Separator
-    (box :class "power-separator")
-
-    ;; Cancel button
-    (button
-      :class "power-cancel"
-      :onclick "eww close power-overlay"
-      (label :text "Cancel")
     )
   )
 )

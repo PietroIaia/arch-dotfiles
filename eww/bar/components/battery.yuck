@@ -1,12 +1,9 @@
 ;; Battery widget
 (defwidget battery []
   (box
-    :class "battery"
+    :class "widget-new battery"
     :orientation "h"
     :space-evenly false
-    (label
-      :text "${battery_percent}%"
-    )
     (label
       :class "battery-icon ${battery_status == 'Charging' ?
         'charging'
@@ -39,6 +36,10 @@
                 :
                 ''
       }"
+    )
+    (label
+      :class "battery-label"
+      :text "${battery_percent}%"
     )
   )
 )
