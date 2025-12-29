@@ -1,7 +1,7 @@
 ;; Clock widget
 (defwidget clock []
   (box 
-    :class "widget-new clock"
+    :class "widget clock"
     :orientation "h"
     :space-evenly false
     :halign "end"

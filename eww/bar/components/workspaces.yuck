@@ -5,27 +5,27 @@
     :space-evenly false
     :halign "start"
     (button 
-      :class "widget-new workspace ${current_workspace == "1" ? "active" : ""}"
+      :class "widget workspace ${current_workspace == "1" ? "active" : ""}"
       :onclick "hyprctl dispatch workspace 1"
       "1"
     )
     (button
-      :class "widget-new workspace ${current_workspace == "2" ? "active" : ""}"
+      :class "widget workspace ${current_workspace == "2" ? "active" : ""}"
       :onclick "hyprctl dispatch workspace 2"
       "2"
     )
     (button
-      :class "widget-new workspace ${current_workspace == "3" ? "active" : ""}"
+      :class "widget workspace ${current_workspace == "3" ? "active" : ""}"
       :onclick "hyprctl dispatch workspace 3"
       "3"
     )
     (button
-      :class "widget-new workspace ${current_workspace == "4" ? "active" : ""}"
+      :class "widget workspace ${current_workspace == "4" ? "active" : ""}"
       :onclick "hyprctl dispatch workspace 4"
       "4"
     )
     (button
-      :class "widget-new workspace ${current_workspace == "5" ? "active" : ""}"
+      :class "widget workspace ${current_workspace == "5" ? "active" : ""}"
       :onclick "hyprctl dispatch workspace 5"
       "5"
     )

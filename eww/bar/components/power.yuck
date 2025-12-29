@@ -4,7 +4,7 @@
 ;; Main power button widget that appears in the settings bar
 (defwidget power_button []
   (button
-    :class "widget-new power-button"
+    :class "widget power-button"
     :onclick "eww open --toggle power-overlay"
     (label
       :text "⏻"

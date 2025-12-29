@@ -1,7 +1,7 @@
 ;; Battery widget
 (defwidget battery []
   (box
-    :class "widget-new battery"
+    :class "widget battery"
     :orientation "h"
     :space-evenly false
     (label

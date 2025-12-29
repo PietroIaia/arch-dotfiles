@@ -1,10 +1,10 @@
 ;; Volume button widget
 (defwidget volume_button []
   (button 
-    :class "widget-new volume-button"
+    :class "widget volume-button"
     :onclick "eww open --toggle volume-popup"
     (label
-      :text "${volume_muted == 'true' ? '🔇' : volume >= 66 ? '🔊' : volume >= 33 ? '🔉' : '🔈'}"
+      :text "${volume_muted == 'true' ? '' : volume >= 66 ? '' : volume >= 33 ? '' : ''}"
     )
   )
 )
@@ -19,7 +19,7 @@
       :class "volume-mute-button"
       :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
       (label 
-        :text "${volume_muted == 'true' ? '🔇' : '🔊'}"
+        :text "${volume_muted == 'true' ? '' : ''}"
       )
     )
     (scale
