@@ -3,10 +3,10 @@
 }
 
 $primary-color: #cd9ae5;
-$secondary-color: #3a2987;
-$background-color: rgba(47, 12, 70, .7);
-$hover-color: rgba(58, 41, 135, .7);
-$overlay-background-color: rgba(47, 12, 70, .5);
+$secondary-color: #340152;
+$background-color: #3a2987;
+$hover-color: rgba(47, 12, 70, .7);
+$overlay-background-color: rgba(58, 41, 135, .7);
 $overlay-hover-color: rgba(205, 154, 229, 0.2);
 $border-color: #ffffff;
 $border-radius: 8px;
@@ -168,8 +168,8 @@ $icon-size: 16px;
 }
 
 .network-toggle:hover {
-  background-color: #7a5a95;
-  border-color: $border-color;
+  background-color: $overlay-hover-color;
+  border-color: $primary-color;
 }
 
 .network-status {
