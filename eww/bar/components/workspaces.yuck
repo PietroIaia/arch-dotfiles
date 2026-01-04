@@ -1,33 +1,15 @@
-(defwidget workspaces []
+(defwidget workspaces [start monitor]
   (box
     :class "workspaces"
     :orientation "h"
     :space-evenly false
     :halign "start"
-    (button 
-      :class "widget workspace ${current_workspace == "1" ? "active" : ""}"
-      :onclick "hyprctl dispatch workspace 1"
-      "1"
-    )
-    (button
-      :class "widget workspace ${current_workspace == "2" ? "active" : ""}"
-      :onclick "hyprctl dispatch workspace 2"
-      "2"
-    )
-    (button
-      :class "widget workspace ${current_workspace == "3" ? "active" : ""}"
-      :onclick "hyprctl dispatch workspace 3"
-      "3"
-    )
-    (button
-      :class "widget workspace ${current_workspace == "4" ? "active" : ""}"
-      :onclick "hyprctl dispatch workspace 4"
-      "4"
-    )
-    (button
-      :class "widget workspace ${current_workspace == "5" ? "active" : ""}"
-      :onclick "hyprctl dispatch workspace 5"
-      "5"
+    (for ws in "[${start}, ${start + 1}, ${start + 2}, ${start + 3}, ${start + 4}]"
+      (button
+        :class "widget workspace ${(monitor == 0 ? monitor0_workspace : monitor1_workspace) == ws ? "active" : ""}"
+        :onclick "hyprctl dispatch workspace ${ws}"
+        "${ws}"
+      )
     )
   )
 )

@@ -1,7 +1,7 @@
 ;; Volume button widget
 (defwidget volume_button []
   (button 
-    :class "widget volume-button"
+    :class "widget volume"
     :onclick "eww open --toggle volume-popup"
     (label
       :text "${volume_muted == 'true' ? '' : volume >= 66 ? '' : volume >= 33 ? '' : ''}"

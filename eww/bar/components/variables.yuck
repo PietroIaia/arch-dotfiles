@@ -1,5 +1,6 @@
 ;; Workspace variables
-(defpoll current_workspace :interval "100ms" "hyprctl activeworkspace -j | jq -r '.id'")
+(defpoll monitor0_workspace :interval "100ms" "hyprctl monitors -j | jq -r '.[] | select(.id == 0) | .activeWorkspace.id'")
+(defpoll monitor1_workspace :interval "100ms" "hyprctl monitors -j | jq -r '.[] | select(.id == 1) | .activeWorkspace.id'")
 ;; Volume variables
 (defpoll volume :interval "100ms" "pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\\d+%' | head -1 | tr -d '%'")
 (defpoll volume_muted :interval "100ms" "pactl get-sink-mute @DEFAULT_SINK@ | grep -q 'yes' && echo 'true' || echo 'false'")

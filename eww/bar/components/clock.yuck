@@ -5,7 +5,11 @@
     :orientation "h"
     :space-evenly false
     :halign "end"
+    (label
+      :text "󰥔"
+    )
     (label 
+      :class "clock-label"
       :text "${formattime(EWW_TIME, "%I:%M%p")}"
     )
   )

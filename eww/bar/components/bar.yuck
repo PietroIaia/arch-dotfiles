@@ -2,11 +2,11 @@
 (include "./bar/components/settings.yuck")
 
 ;; Main bar widget
-(defwidget bar []
-  (centerbox 
+(defwidget bar [ws_start monitor]
+  (centerbox
     :orientation "h"
     :class "taskbar"
-    (workspaces)
+    (workspaces :start ws_start :monitor monitor)
     (box)
     (settings)
   )

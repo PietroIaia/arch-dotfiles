@@ -4,7 +4,7 @@
 ;; Main WiFi button widget that appears in the settings bar
 (defwidget wifi_button []
   (button
-    :class "widget network-button"
+    :class "widget network"
     :onclick "eww open --toggle network-popup"
     (box
       :orientation "h"

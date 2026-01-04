@@ -1,10 +1,10 @@
 (include "./bar/components/variables.yuck")
 (include "./bar/components/bar.yuck")
 
-;; Window definition
+;; Window definition for monitor 0 (workspaces 1-5)
 (defwindow bar
   :monitor 0
-  :geometry (geometry 
+  :geometry (geometry
     :x "0%"
     :y "5"
     :width "100%"
@@ -14,6 +14,22 @@
   :stacking "fg"
   :exclusive true
   :focusable false
-  (bar)
+  (bar :ws_start 1 :monitor 0)
+)
+
+;; Window definition for monitor 1 (workspaces 6-10)
+(defwindow bar1
+  :monitor 1
+  :geometry (geometry
+    :x "0%"
+    :y "5"
+    :width "100%"
+    :height "2%"
+    :anchor "top center"
+  )
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (bar :ws_start 6 :monitor 1)
 )
 
