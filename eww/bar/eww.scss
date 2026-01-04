@@ -101,6 +101,10 @@ $icon-size: 16px;
   font-size: $icon-size;
 }
 
+.battery-icon.low-power {
+  color: $primary-color;
+}
+
 .battery-icon.full {
   color: #2ECC71;
 }

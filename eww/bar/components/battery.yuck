@@ -1,22 +1,25 @@
 ;; Battery widget
 (defwidget battery []
   (button
-    :onclick "powerprofilesctl set $([ $(powerprofilesctl get) = 'power-saver' ] && echo 'balanced' || echo 'power-saver')"
+    :onclick "echo ${power_profile == 'balanced' ? 'low-power' : 'balanced'} | sudo tee /sys/firmware/acpi/platform_profile"
     :class "widget battery"
     (box
       :orientation "h"
       :space-evenly false
       (label
-        :class "battery-icon ${battery_status == 'Charging' ?
-          'charging'
+        :class "battery-icon ${power_profile == 'low-power' ?
+          'low-power'
           :
-          battery_percent <= 25 ?
-            'low'
+            battery_status == 'Charging' ?
+            'charging'
             :
-            battery_percent <= 75 ?
-              'half'
+            battery_percent <= 25 ?
+              'low'
               :
-              'full'
+              battery_percent <= 75 ?
+                'half'
+                :
+                'full'
         }"
         :text "${battery_status == 'Charging' ?
           battery_charging_frame == 0 ? '' :

@@ -8,6 +8,7 @@
 (defpoll battery_percent :interval "5s" "cat /sys/class/power_supply/BAT0/capacity")
 (defpoll battery_status :interval "1s" "cat /sys/class/power_supply/BAT0/status")
 (defpoll battery_charging_frame :interval "500ms" "echo $(( ($(date +%s) / 1) % 5 ))")
+(defpoll power_profile :interval "2s" "cat /sys/firmware/acpi/platform_profile")
 ;; Network/WiFi variables
 (defpoll wifi_enabled :interval "2s" "nmcli radio wifi")
 (defpoll wifi_connected :interval "2s" "nmcli -t -f DEVICE,TYPE,STATE device | grep -q 'wifi:connected' && echo 'yes' || echo 'no'")
