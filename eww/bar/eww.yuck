@@ -2,8 +2,7 @@
 (include "./bar/components/bar.yuck")
 
 ;; Window definition for monitor 0 (workspaces 1-5)
-(defwindow bar
-  :monitor 0
+(defwindow primary-bar
   :geometry (geometry
     :x "0%"
     :y "5"
@@ -18,8 +17,7 @@
 )
 
 ;; Window definition for monitor 1 (workspaces 6-10)
-(defwindow bar1
-  :monitor 1
+(defwindow secondary-bar
   :geometry (geometry
     :x "0%"
     :y "5"
