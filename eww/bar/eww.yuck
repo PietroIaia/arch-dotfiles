@@ -13,7 +13,7 @@
   :stacking "fg"
   :exclusive true
   :focusable false
-  (bar :ws_start 1 :monitor 0)
+  (bar :ws_start 1 :monitor primary_bar_monitor)
 )
 
 ;; Window definition for monitor 1 (workspaces 6-10)
@@ -28,6 +28,6 @@
   :stacking "fg"
   :exclusive true
   :focusable false
-  (bar :ws_start 6 :monitor 1)
+  (bar :ws_start 6 :monitor secondary_bar_monitor)
 )
 
