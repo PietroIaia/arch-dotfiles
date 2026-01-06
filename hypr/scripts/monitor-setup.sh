@@ -18,10 +18,19 @@ if [ -n "$HDMI_ID" ]; then
     # We want: HDMI shows workspaces 1-5, Laptop shows workspaces 6-10
     # bar = workspaces 1-5, bar1 = workspaces 6-10
 
+    # Move workspaces 1-5 to HDMI-A-1
+    for ws in 1 2 3 4 5; do
+        hyprctl dispatch moveworkspacetomonitor $ws HDMI-A-1 > /dev/null
+    done
+
     eww open primary-bar --screen $HDMI_ID   # workspaces 1-5 on monitor 0 (HDMI)
     eww open secondary-bar --screen $LAPTOP_ID  # workspaces 6-10 on monitor 1 (laptop)
 else
     echo "HDMI not connected - Laptop ID: $LAPTOP_ID"
     # Only laptop connected - it becomes monitor 0, show workspaces 1-5
+
+    hyprctl dispatch workspace 1 > /dev/null
+    
     eww open primary-bar --screen $LAPTOP_ID
+
 fi
