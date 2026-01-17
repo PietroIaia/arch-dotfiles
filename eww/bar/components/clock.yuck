@@ -6,11 +6,11 @@
     :space-evenly false
     :halign "end"
     (label
-      :text "󰥔"
+      :text ""
     )
     (label 
       :class "clock-label"
-      :text "${formattime(EWW_TIME, "%I:%M%p")}"
+      :text "${formattime(EWW_TIME, '%d-%m-%Y')} | ${formattime(EWW_TIME, "%I:%M%p")}"
     )
   )
 )
