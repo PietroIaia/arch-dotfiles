@@ -9,3 +9,5 @@
 !/niflveil/**
 !/tmux
 !/tmux/**
+
+/hypr/.state
