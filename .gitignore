@@ -9,5 +9,7 @@
 !/niflveil/**
 !/tmux
 !/tmux/**
+!/fastfetch
+!/fastfetch/**
 
 /hypr/.state
