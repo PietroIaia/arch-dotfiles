@@ -5,16 +5,16 @@
 (include "./bar/components/power.yuck")
 
 ;; Settings widget
-(defwidget settings []
+(defwidget settings [monitor]
   (box
     :orientation "h"
     :space-evenly false
     :halign "end"
-    (volume_button)
+    (volume_button :monitor monitor)
     (battery)
-    (wifi_button)
+    (wifi_button :monitor monitor)
     (clock)
-    (power_button)
+    (power_button :monitor monitor)
   )
 )
 

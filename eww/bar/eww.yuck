@@ -1,6 +1,42 @@
 (include "./bar/components/variables.yuck")
 (include "./bar/components/bar.yuck")
 
+;; Click-catchers: one per monitor, positioned below the bar so bar buttons remain clickable.
+;; Both open whenever a popup opens; clicking either closes the active popup.
+(defwindow click-catcher-0
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "95%"
+    :anchor "top center"
+  )
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  (eventbox
+    :onclick "~/.config/eww/scripts/close-popup.sh"
+    (box :hexpand true :vexpand true)
+  )
+)
+
+(defwindow click-catcher-1
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "95%"
+    :anchor "top center"
+  )
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  (eventbox
+    :onclick "~/.config/eww/scripts/close-popup.sh"
+    (box :hexpand true :vexpand true)
+  )
+)
+
 ;; Window definition for monitor 0 (workspaces 1-5)
 (defwindow primary-bar
   :geometry (geometry

@@ -8,7 +8,7 @@
     :class "taskbar"
     (workspaces :start ws_start :monitor monitor)
     (box)
-    (settings)
+    (settings :monitor monitor)
   )
 )
 

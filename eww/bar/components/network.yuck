@@ -2,10 +2,10 @@
 ;; Displays WiFi status in the bar and provides a popup with connection details
 
 ;; Main WiFi button widget that appears in the settings bar
-(defwidget wifi_button []
+(defwidget wifi_button [monitor]
   (button
     :class "widget network"
-    :onclick "eww open --toggle network-popup"
+    :onclick "~/.config/eww/scripts/toggle-popup.sh network-popup ${monitor}"
     (box
       :orientation "h"
       :space-evenly false
@@ -102,7 +102,6 @@
 
 ;; Popup window definition
 (defwindow network-popup
-  :monitor 0
   :geometry (geometry
     :x "5px"
     :y "5px"

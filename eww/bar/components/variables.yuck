@@ -1,3 +1,6 @@
+;; Popup state
+(defvar popup_open "none")
+
 ;; Workspace variables
 (defpoll monitor0_workspace :interval "100ms" "hyprctl monitors -j | jq 'to_entries | .[] | select(.key == 0) | .value.activeWorkspace.id'")
 (defpoll monitor1_workspace :interval "100ms" "hyprctl monitors -j | jq 'to_entries | .[] | select(.key == 1) | .value.activeWorkspace.id'")

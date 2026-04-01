@@ -2,10 +2,10 @@
 ;; Provides shutdown, reboot, sleep, and logout options
 
 ;; Main power button widget that appears in the settings bar
-(defwidget power_button []
+(defwidget power_button [monitor]
   (button
     :class "widget power"
-    :onclick "eww open --toggle power-overlay"
+    :onclick "~/.config/eww/scripts/toggle-popup.sh power-overlay ${monitor}"
     (label
       :text "⏻"
     )
@@ -28,7 +28,7 @@
         :space-evenly true
         (button
           :class "power-option"
-          :onclick "eww close power-overlay && systemctl poweroff"
+          :onclick "~/.config/eww/scripts/close-popup.sh && systemctl poweroff"
           (box
             :orientation "v"
             :space-evenly false
@@ -38,7 +38,7 @@
         )
         (button
           :class "power-option"
-          :onclick "eww close power-overlay && systemctl reboot"
+          :onclick "~/.config/eww/scripts/close-popup.sh && systemctl reboot"
           (box
             :orientation "v"
             :space-evenly false
@@ -54,7 +54,7 @@
 
         (button
           :class "power-option"
-          :onclick "eww close power-overlay && systemctl suspend"
+          :onclick "~/.config/eww/scripts/close-popup.sh && systemctl suspend"
           (box
             :orientation "v"
             :space-evenly false
@@ -64,7 +64,7 @@
         )
         (button
           :class "power-option"
-          :onclick "eww close power-overlay && hyprctl dispatch exit"
+          :onclick "~/.config/eww/scripts/close-popup.sh && hyprctl dispatch exit"
           (box
             :orientation "v"
             :space-evenly false
@@ -79,7 +79,6 @@
 
 ;; Overlay window definition
 (defwindow power-overlay
-  :monitor 0
   :geometry (geometry
     :x "0%"
     :y "0%"
