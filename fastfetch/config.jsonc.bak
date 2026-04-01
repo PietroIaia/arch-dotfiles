@@ -3,12 +3,10 @@
     "logo": {
         "type": "auto",
         "source": "~/.config/fastfetch/pictures/random.png",
-        "width": 30,
-        "height": 20,
         "padding": {
             "top": 1,
             "left": 1,
-            "right": 1
+            "right": 1,
         }
     },
     "display": {
@@ -43,29 +41,17 @@
             "type": "shell"
         },
         {
-            "key": "{$2}{#31}󰩟 network  ",
-            "type": "localip",
-            "format": "{ipv4} ({ifname})"
-        },
-        {
-            "format": "{#1}{#keys}├{$1}┤ \u001b[76D Hardware ",
-            "type": "custom"
-        },
-        {
-            "key": "{$2}{#35}󰍛 cpu      ",
-            "type": "cpu",
-            "showPeCoreCount": true
-        },
-        {
             "key": "{$2}{#34}󰍛 gpu      ",
             "type": "gpu"
         },
         {
-            "key": "{$2}{#32} memory   ",
-            "type": "memory"
+            "key": "{$2}{#35}󰍛 cpu      ",
+            "type": "cpu",
+            "showPeCoreCount": true,
+            "temp": true
         },
         {
-            "format": "{#1}{#keys}├{$1}┤ \u001b[76D Disks ",
+            "format": "{#1}{#keys}├{$1}┤ \u001b[76D Disk Usage ",
             "type": "custom"
         },
         {
@@ -83,15 +69,22 @@
             "type": "custom"
         },
         {
-            "key": "{$2}{#35}󰍛 cpu      ",
+            "key": "{$2}{#35}󰍛 cpu usage",
             "type": "cpuusage",
             "format": "Avg: {avg} | Max: {max} (Core {max-index}) | Min: {min} (Core {min-index})"
         },
         {
-            "key": "{$2}{#34}└─ temp    ",
-            "type": "cpu",
-            "temp": true,
-            "format": "{temperature}"
+            "key": "{$2}{#32} memory   ",
+            "type": "memory"
+        },
+        {
+            "key": "{$2}{#31}󰩟 network  ",
+            "type": "localip",
+            "format": "{ipv4} ({ifname})"
+        },
+        {
+            "format": "{#1}{#keys}├{$1}┤",
+            "type": "custom"
         },
         {
             "format": "{#1}{#keys}╰{$1}╯",
