@@ -3,7 +3,7 @@
     "logo": {
         "type": "auto",
         "source": "~/.config/fastfetch/pictures/random.png",
-        "width": 17,
+        "width": 14,
         "height": 10,
         "padding": {
             "top": 1,
@@ -27,7 +27,7 @@
             "type": "title"
         },
         {
-            "key": "{$2}{#31} kernel   ",
+            "key": "{$2}{#31} kernel   ",
             "type": "kernel"
         },
         {
@@ -39,7 +39,7 @@
             "type": "os"
         },
         {
-            "key": "{$2}{#36} shell    ",
+            "key": "{$2}{#36} shell    ",
             "type": "shell"
         },
         {
@@ -62,7 +62,7 @@
             "text": "nvidia-smi --query-gpu=name --format=csv,noheader 2>/dev/null"
         },
         {
-            "key": "{$2}{#32} memory   ",
+            "key": "{$2}{#32} memory   ",
             "type": "memory"
         },
         {
