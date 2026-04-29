@@ -3,8 +3,8 @@
     "logo": {
         "type": "auto",
         "source": "~/.config/fastfetch/pictures/random.png",
-        "width": 30,
-        "height": 20,
+        "width": 31,
+        "height": 12,
         "padding": {
             "top": 1,
             "left": 1,
@@ -17,13 +17,13 @@
             "separator": "red"
         },
         "constants": [
-            "───────────────────────────────────────────────────────────────────────────",
-            "│\u001b[75C│\u001b[75D"
+            "──────────────────────────────────────────────────",
+            "│\u001b[50C│\u001b[50D"
         ]
     },
     "modules": [
         {
-            "format": "{#1}{#keys}╭{$1}╮\u001b[76D {user-name-colored}{at-symbol-colored}{host-name-colored} ",
+            "format": "{#1}{#keys}╭{$1}╮\u001b[51D {user-name-colored}{at-symbol-colored}{host-name-colored} ",
             "type": "title"
         },
         {
@@ -48,7 +48,7 @@
             "format": "{ipv4} ({ifname})"
         },
         {
-            "format": "{#1}{#keys}├{$1}┤ \u001b[76D Hardware ",
+            "format": "{#1}{#keys}├{$1}┤\u001b[50D Hardware ",
             "type": "custom"
         },
         {
@@ -58,34 +58,37 @@
         },
         {
             "key": "{$2}{#34}󰍛 gpu      ",
-            "type": "gpu"
+            "type": "command",
+            "text": "nvidia-smi --query-gpu=name --format=csv,noheader 2>/dev/null"
         },
         {
             "key": "{$2}{#32} memory   ",
             "type": "memory"
         },
         {
-            "format": "{#1}{#keys}├{$1}┤ \u001b[76D Disks ",
+            "format": "{#1}{#keys}├{$1}┤\u001b[50D Disks ",
             "type": "custom"
         },
         {
             "key": "{$2}{#33}󰉉 root     ",
             "type": "disk",
+            "format": "{size-used} / {size-total} ({size-percentage})",
             "folders": "/"
         },
         {
             "key": "{$2}{#33}󰉉 home     ",
             "type": "disk",
+            "format": "{size-used} / {size-total} ({size-percentage})",
             "folders": "/home"
         },
         {
-            "format": "{#1}{#keys}├{$1}┤ \u001b[76D Diagnostics ",
+            "format": "{#1}{#keys}├{$1}┤\u001b[50D Diagnostics ",
             "type": "custom"
         },
         {
             "key": "{$2}{#35}󰍛 cpu      ",
             "type": "cpuusage",
-            "format": "Avg: {avg} | Max: {max} (Core {max-index}) | Min: {min} (Core {min-index})"
+            "format": "Avg: {avg} | Max: {max} | Min: {min}"
         },
         {
             "key": "{$2}{#34}└─ temp    ",
