@@ -1,17 +1,66 @@
 ;; Clock widget
-(defwidget clock []
-  (box 
+(defwidget clock [monitor]
+  (button
     :class "widget clock"
-    :orientation "h"
-    :space-evenly false
-    :halign "end"
-    (label
-      :text ""
-    )
-    (label 
-      :class "clock-label"
-      :text "${formattime(EWW_TIME, '%d-%m-%Y')} | ${formattime(EWW_TIME, "%I:%M%p")}"
+    :onclick "~/.config/eww/scripts/toggle-popup.sh calendar-popup ${monitor}"
+    (box
+      :orientation "h"
+      :space-evenly false
+      :halign "end"
+      (label
+        :text ""
+      )
+      (label
+        :class "clock-label"
+        :text "${formattime(EWW_TIME, '%d-%m-%Y')} | ${formattime(EWW_TIME, '%I:%M%p')}"
+      )
     )
   )
 )
 
+;; Calendar popup widget
+(defwidget calendar_popup []
+  (box
+    :class "calendar-popup"
+    :orientation "v"
+    :space-evenly false
+
+    (label
+      :class "cal-clock"
+      :text "${formattime(EWW_TIME, '%I:%M:%S %p')}"
+    )
+
+    (box :class "cal-separator")
+
+    (box
+      :class "cal-header"
+      :orientation "h"
+      :space-evenly false
+      (button
+        :class "cal-nav-btn"
+        :onclick "~/.config/eww/scripts/cal-nav.sh prev"
+        (label :text "‹")
+      )
+      (label
+        :class "cal-month-label"
+        :hexpand true
+        :halign "center"
+        :text "${cal_month == 1 ? 'January' : cal_month == 2 ? 'February' : cal_month == 3 ? 'March' : cal_month == 4 ? 'April' : cal_month == 5 ? 'May' : cal_month == 6 ? 'June' : cal_month == 7 ? 'July' : cal_month == 8 ? 'August' : cal_month == 9 ? 'September' : cal_month == 10 ? 'October' : cal_month == 11 ? 'November' : 'December'} ${cal_year}"
+      )
+      (button
+        :class "cal-nav-btn"
+        :onclick "~/.config/eww/scripts/cal-nav.sh next"
+        (label :text "›")
+      )
+    )
+
+    (literal :content cal_grid)
+
+    (button
+      :class "cal-today-btn"
+      :halign "center"
+      :onclick "~/.config/eww/scripts/cal-nav.sh reset"
+      (label :text "Today")
+    )
+  )
+)

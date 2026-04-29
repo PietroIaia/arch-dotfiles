@@ -312,3 +312,94 @@ $icon-size: 16px;
   font-weight: bold;
 }
 
+/* Calendar popup */
+.calendar-popup {
+  background-color: $overlay-background-color;
+  border: 2px solid $border-color;
+  border-radius: $border-radius;
+  padding: 15px;
+  min-width: 300px;
+}
+
+.cal-clock {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.cal-separator {
+  min-height: 1px;
+  background-color: $border-color;
+  margin: 8px 0;
+}
+
+.cal-header {
+  margin-bottom: 4px;
+}
+
+.cal-month-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.cal-nav-btn {
+  padding: 4px 10px;
+  border-radius: $border-radius;
+  border: 1px solid transparent;
+  font-size: 14px;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.cal-nav-btn:hover {
+  background-color: $overlay-hover-color;
+  border-color: $primary-color;
+}
+
+.cal-today-btn {
+  margin-top: 16px;
+  padding: 5px 20px;
+  border-radius: $border-radius;
+  border: 1px solid $primary-color;
+  font-size: 12px;
+  font-weight: bold;
+  color: $primary-color;
+  transition: all 0.2s ease;
+}
+
+.cal-today-btn:hover {
+  background-color: $overlay-hover-color;
+}
+
+/* Calendar grid - custom bash-generated cells */
+.cal-day-name {
+  color: #b8b8b8;
+  font-size: 11px;
+  font-weight: bold;
+  min-width: 32px;
+  padding: 2px 4px;
+}
+
+.cal-day {
+  color: #ffffff;
+  font-size: 13px;
+  min-width: 32px;
+  border-radius: $border-radius;
+  border: 1px solid transparent;
+  padding: 4px 2px;
+  transition: all 0.15s ease;
+}
+
+.cal-today {
+  background-color: $secondary-color;
+  color: $primary-color;
+  font-weight: bold;
+  border: 1px solid $primary-color;
+}
+
+.cal-other-month {
+  color: rgba(255, 255, 255, 0.3);
+}
+

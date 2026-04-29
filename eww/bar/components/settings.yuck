@@ -13,7 +13,7 @@
     (volume_button :monitor monitor)
     (battery)
     (wifi_button :monitor monitor)
-    (clock)
+    (clock :monitor monitor)
     (power_button :monitor monitor)
   )
 )

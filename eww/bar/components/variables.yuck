@@ -1,6 +1,11 @@
 ;; Popup state
 (defvar popup_open "none")
 
+;; Calendar popup state
+(defvar cal_month 4)
+(defvar cal_year 2026)
+(defpoll cal_grid :interval "500ms" "~/.config/eww/scripts/cal-grid.sh")
+
 ;; Workspace variables
 (defpoll monitor0_workspace :interval "100ms" "hyprctl monitors -j | jq 'to_entries | .[] | select(.key == 0) | .value.activeWorkspace.id'")
 (defpoll monitor1_workspace :interval "100ms" "hyprctl monitors -j | jq 'to_entries | .[] | select(.key == 1) | .value.activeWorkspace.id'")
