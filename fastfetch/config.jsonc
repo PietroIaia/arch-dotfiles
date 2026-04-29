@@ -3,8 +3,8 @@
     "logo": {
         "type": "auto",
         "source": "~/.config/fastfetch/pictures/random.png",
-        "width": 16,
-        "height": 12,
+        "width": 17,
+        "height": 10,
         "padding": {
             "top": 1,
             "left": 1,
@@ -99,7 +99,7 @@
         {
             "key": "{$2}{#34}󰿵 gpu      ",
             "type": "command",
-            "text": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null | awk '{v=$1+0; c=(v<40)?\"\\033[32m\":(v<70)?\"\\033[33m\":\"\\033[31m\"; printf \"%s%d%%\\033[0m\",c,v}'"
+            "text": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null | awk '{v=$1+0; c=(v<40)?\"\\033[32m\":(v<70)?\"\\033[33m\":\"\\033[31m\"; printf \"Usage: %s%d%%\\033[0m\",c,v}'"
         },
         {
             "key": "{$2}{#34}└─ temp    ",
