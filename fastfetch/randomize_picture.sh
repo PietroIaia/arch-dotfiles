@@ -55,7 +55,9 @@ ideal_h = round(logo_w * img_h / (img_w * 2))
 cfg['logo']['width']  = logo_w
 cfg['logo']['height'] = max(1, min(ideal_h, max_h))
 
+output = json.dumps(cfg, indent=4, ensure_ascii=False)
+output = output.replace('\x1b', '\\u001b')
 with open(cfg_path, 'w') as f:
-    json.dump(cfg, f, indent=4, ensure_ascii=False)
+    f.write(output)
     f.write('\n')
 PYEOF

@@ -3,8 +3,8 @@
     "logo": {
         "type": "auto",
         "source": "~/.config/fastfetch/pictures/random.png",
-        "width": 19,
-        "height": 8,
+        "width": 16,
+        "height": 12,
         "padding": {
             "top": 1,
             "left": 1,
@@ -27,7 +27,7 @@
             "type": "title"
         },
         {
-            "key": "{$2}{#31} kernel   ",
+            "key": "{$2}{#31} kernel   ",
             "type": "kernel"
         },
         {
@@ -39,7 +39,7 @@
             "type": "os"
         },
         {
-            "key": "{$2}{#36} shell    ",
+            "key": "{$2}{#36} shell    ",
             "type": "shell"
         },
         {
@@ -57,12 +57,12 @@
             "showPeCoreCount": true
         },
         {
-            "key": "{$2}{#34}󰍛 gpu      ",
+            "key": "{$2}{#34}󰿵 gpu      ",
             "type": "command",
             "text": "nvidia-smi --query-gpu=name --format=csv,noheader 2>/dev/null"
         },
         {
-            "key": "{$2}{#32} memory   ",
+            "key": "{$2}{#32} memory   ",
             "type": "memory"
         },
         {
@@ -91,10 +91,20 @@
             "format": "Avg: {avg} | Max: {max} | Min: {min}"
         },
         {
-            "key": "{$2}{#34}└─ temp    ",
+            "key": "{$2}{#35}└─ temp    ",
             "type": "cpu",
             "temp": true,
             "format": "{temperature}"
+        },
+        {
+            "key": "{$2}{#34}󰿵 gpu      ",
+            "type": "command",
+            "text": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null | awk '{v=$1+0; c=(v<40)?\"\\033[32m\":(v<70)?\"\\033[33m\":\"\\033[31m\"; printf \"%s%d%%\\033[0m\",c,v}'"
+        },
+        {
+            "key": "{$2}{#34}└─ temp    ",
+            "type": "command",
+            "text": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader 2>/dev/null | awk '{v=$1+0; c=(v<60)?\"\\033[32m\":(v<80)?\"\\033[33m\":\"\\033[31m\"; printf \"%s%.1f°C\\033[0m\",c,v}'"
         },
         {
             "format": "{#1}{#keys}╰{$1}╯",
