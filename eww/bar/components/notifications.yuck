@@ -51,12 +51,17 @@
 ;; Notification stack — pushes cards below the bar and any open popup
 (defwidget notification_stack []
   (box
-    :class "notification-stack"
     :orientation "v"
     :valign "start"
     :space-evenly false
-    :style "margin-top: ${popup_open == 'calendar-window' ? '400' : popup_open == 'network-window' ? '350' : popup_open == 'volume-window' ? '100' : '0'}px;"
-    (for n in notifications
-      (notification_card :n n))
+    (box :class "notification-anchor")
+    (box
+      :class "notification-stack"
+      :orientation "v"
+      :space-evenly false
+      :style "margin-top: ${popup_open == 'calendar-window' ? '400' : popup_open == 'network-window' ? '350' : popup_open == 'volume-window' ? '100' : '0'}px;"
+      (for n in notifications
+        (notification_card :n n))
+    )
   )
 )
