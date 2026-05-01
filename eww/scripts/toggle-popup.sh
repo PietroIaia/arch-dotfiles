@@ -16,6 +16,9 @@ else
         eww close "$CURRENT" 2>/dev/null
     fi
     eww update popup_open="$POPUP"
+    if [ "$POPUP" = "calendar-popup" ]; then
+        ~/.config/eww/scripts/cal-nav.sh reset
+    fi
     eww open "$POPUP" --screen "$SCREEN"
     eww open click-catcher-0 --screen 0 2>/dev/null
     eww open click-catcher-1 --screen 1 2>/dev/null

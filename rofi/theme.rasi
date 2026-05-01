@@ -1,0 +1,169 @@
+/*
+ * Rofi theme — colors come from ~/.config/colors/palette.toml
+ * via the generated _palette.rasi partial. Edit the palette,
+ * then run ~/.config/colors/render.sh to regenerate.
+ */
+
+@import "_palette.rasi"
+
+* {
+    background-color:  transparent;
+    text-color:        @fg;
+    font:              "JetBrainsMono Nerd Font 11";
+}
+
+window {
+    transparency:      "real";
+    location:          center;
+    anchor:            center;
+    fullscreen:        false;
+    width:             640px;
+    border:            2px;
+    border-color:      @border-col;
+    border-radius:     8px;
+    background-color:  @overlay-bg;
+    padding:           15px;
+}
+
+mainbox {
+    spacing:           12px;
+    padding:           0;
+    children:          [ "inputbar", "message", "listview" ];
+}
+
+inputbar {
+    background-color:  @bg;
+    border:            1px;
+    border-color:      @primary;
+    border-radius:     8px;
+    padding:           10px 12px;
+    spacing:           8px;
+    children:          [ "prompt", "entry" ];
+}
+
+prompt {
+    text-color:        @primary;
+    font:              "JetBrainsMono Nerd Font Bold 11";
+}
+
+entry {
+    placeholder:       "Search…";
+    placeholder-color: @fg-muted;
+    text-color:        @fg;
+    cursor:            text;
+}
+
+message {
+    background-color:  @bg;
+    border:            1px;
+    border-color:      @primary;
+    border-radius:     8px;
+    padding:           8px 12px;
+}
+
+textbox {
+    text-color:        @fg;
+}
+
+listview {
+    columns:           1;
+    lines:             8;
+    cycle:             true;
+    dynamic:           true;
+    scrollbar:         true;
+    spacing:           4px;
+    fixed-height:      true;
+}
+
+scrollbar {
+    handle-width:      4px;
+    handle-color:      @primary;
+    border-radius:     8px;
+    background-color:  @secondary;
+}
+
+element {
+    padding:           8px 10px;
+    border-radius:     8px;
+    border:            1px;
+    border-color:      transparent;
+    spacing:           10px;
+}
+
+element normal.normal {
+    background-color:  transparent;
+    text-color:        @fg;
+}
+
+element normal.urgent {
+    background-color:  transparent;
+    text-color:        @urgent;
+}
+
+element normal.active {
+    background-color:  transparent;
+    text-color:        @accent;
+}
+
+element selected.normal {
+    background-color:  @secondary;
+    border-color:      @primary;
+    text-color:        @primary;
+}
+
+element selected.urgent {
+    background-color:  @secondary;
+    border-color:      @urgent;
+    text-color:        @urgent;
+}
+
+element selected.active {
+    background-color:  @secondary;
+    border-color:      @accent;
+    text-color:        @accent;
+}
+
+element alternate.normal {
+    background-color:  transparent;
+    text-color:        @fg;
+}
+
+element-icon {
+    size:              22px;
+    background-color:  transparent;
+    vertical-align:    0.5;
+}
+
+element-text {
+    background-color:  transparent;
+    text-color:        inherit;
+    vertical-align:    0.5;
+}
+
+mode-switcher {
+    spacing:           8px;
+    padding:           4px 0 0 0;
+}
+
+button {
+    padding:           6px 10px;
+    border-radius:     8px;
+    border:            1px;
+    border-color:      transparent;
+    text-color:        @fg-muted;
+}
+
+button selected {
+    background-color:  @secondary;
+    border-color:      @primary;
+    text-color:        @primary;
+}
+
+error-message {
+    background-color:  @bg;
+    border:            2px;
+    border-color:      @urgent;
+    border-radius:     8px;
+    padding:           12px;
+    text-color:        @fg;
+}

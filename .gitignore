@@ -11,5 +11,9 @@
 !/tmux/**
 !/fastfetch
 !/fastfetch/**
+!/rofi
+!/rofi/**
+!/colors
+!/colors/**
 
 /hypr/.state

@@ -6,9 +6,9 @@
 (defvar cal_year 2026)
 (defpoll cal_grid :interval "500ms" "~/.config/eww/scripts/cal-grid.sh")
 
-;; Workspace variables
-(defpoll monitor0_workspace :interval "100ms" "hyprctl monitors -j | jq 'to_entries | .[] | select(.key == 0) | .value.activeWorkspace.id'")
-(defpoll monitor1_workspace :interval "100ms" "hyprctl monitors -j | jq 'to_entries | .[] | select(.key == 1) | .value.activeWorkspace.id'")
+;; Workspace variables (event-driven via Hyprland socket2 — no polling lag)
+(deflisten monitor0_workspace "~/.config/eww/scripts/hypr-monitor-ws.sh 0")
+(deflisten monitor1_workspace "~/.config/eww/scripts/hypr-monitor-ws.sh 1")
 (defpoll primary_bar_monitor :interval "1s" "hyprctl monitors -j | jq '(to_entries | .[] | select(.value.name == \"HDMI-A-1\") | .key) // (to_entries | .[] | select(.value.name == \"eDP-1\") | .key)'")
 (defpoll secondary_bar_monitor :interval "1s" "hyprctl monitors -j | jq 'if (map(.name) | contains([\"HDMI-A-1\"])) then (to_entries | .[] | select(.value.name == \"eDP-1\") | .key) else -1 end'")
 ;; Volume variables

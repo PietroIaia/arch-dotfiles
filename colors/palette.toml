@@ -1,0 +1,22 @@
+# Single source of truth for desktop colorscheme.
+# Consumed by ~/.config/colors/render.sh which generates:
+#   ~/.config/eww/bar/_palette.scss
+#   ~/.config/rofi/_palette.rasi
+#
+# After editing, run: ~/.config/colors/render.sh
+
+[colors]
+primary            = "#cd9ae5"
+secondary          = "#340152"
+background         = "#3a2987"
+hover              = "rgba(47, 12, 70, 0.7)"
+overlay-background = "rgba(58, 41, 135, 0.7)"
+overlay-hover      = "rgba(205, 154, 229, 0.2)"
+border             = "#ffffff"
+accent             = "#0fcbf1"
+urgent             = "#E74C3C"
+fg                 = "#ffffff"
+fg-muted           = "#b8b8b8"
+
+[geometry]
+radius = "8px"

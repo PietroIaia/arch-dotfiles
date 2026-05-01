@@ -2,14 +2,8 @@
   all: unset;
 }
 
-$primary-color: #cd9ae5;
-$secondary-color: #340152;
-$background-color: #3a2987;
-$hover-color: rgba(47, 12, 70, .7);
-$overlay-background-color: rgba(58, 41, 135, .7);
-$overlay-hover-color: rgba(205, 154, 229, 0.2);
-$border-color: #ffffff;
-$border-radius: 8px;
+@import "_palette";
+
 $icon-size: 16px;
 
 .taskbar {
@@ -26,6 +20,8 @@ $icon-size: 16px;
 
 .widget.active {
   background-color: $secondary-color;
+  border: 1px solid $primary-color;
+  color: $primary-color;
 }
 
 .widget:hover {
@@ -36,8 +32,9 @@ $icon-size: 16px;
   margin-left: 10px;
 }
 .workspace {
-  padding: 10px;
+  padding: 9px;
   min-width: 17px;
+  border: 1px solid transparent;
 }
 
 .workspaces {
@@ -183,11 +180,12 @@ $icon-size: 16px;
 }
 
 .network-current {
-  background-color: rgba(205, 154, 229, 0.2);
+  background-color: $secondary-color;
   border: 1px solid $primary-color;
   border-radius: $border-radius;
   padding: 8px 12px;
   margin-right: 5px;
+  color: $primary-color;
 }
 
 .network-current-name {
@@ -288,7 +286,7 @@ $icon-size: 16px;
 
 .power-option {
   background-color: transparent;
-  border: 2px solid $border-color;
+  border: 2px solid $primary-color;
   border-radius: $border-radius;
   padding: 20px;
   margin: 5px;
@@ -365,7 +363,7 @@ $icon-size: 16px;
   border: 1px solid $primary-color;
   font-size: 12px;
   font-weight: bold;
-  color: $primary-color;
+  color: $fg-color;
   transition: all 0.2s ease;
 }
 
