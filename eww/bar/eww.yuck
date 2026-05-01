@@ -1,5 +1,21 @@
 (include "./bar/components/variables.yuck")
 (include "./bar/components/bar.yuck")
+(include "./bar/components/notifications.yuck")
+
+;; Notification window — opened alongside bars at startup
+(defwindow notifications-window
+  :geometry (geometry
+    :x "5px"
+    :y "5px"
+    :width "360px"
+    :height "95%"
+    :anchor "top right"
+  )
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (notification_stack)
+)
 
 ;; Calendar popup window
 (defwindow calendar-popup

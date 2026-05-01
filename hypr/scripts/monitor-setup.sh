@@ -25,6 +25,7 @@ if [ -n "$HDMI_ID" ]; then
 
     eww open primary-bar --screen $HDMI_ID   # workspaces 1-5 on monitor 0 (HDMI)
     eww open secondary-bar --screen $LAPTOP_ID  # workspaces 6-10 on monitor 1 (laptop)
+    eww open notifications-window --screen $HDMI_ID
 else
     echo "HDMI not connected - Laptop ID: $LAPTOP_ID"
     # Only laptop connected - it becomes monitor 0, show workspaces 1-5
@@ -32,5 +33,6 @@ else
     hyprctl dispatch workspace 1 > /dev/null
     
     eww open primary-bar --screen $LAPTOP_ID
+    eww open notifications-window --screen $LAPTOP_ID
 
 fi

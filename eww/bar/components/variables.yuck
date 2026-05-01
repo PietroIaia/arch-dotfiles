@@ -1,6 +1,11 @@
 ;; Popup state
 (defvar popup_open "none")
 
+;; Notification list — driven by notification-daemon.py via D-Bus
+(deflisten notifications
+  :initial "[]"
+  `~/.config/eww/scripts/notification-daemon.py`)
+
 ;; Calendar popup state
 (defvar cal_month 4)
 (defvar cal_year 2026)

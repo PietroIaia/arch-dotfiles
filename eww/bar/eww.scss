@@ -401,3 +401,53 @@ $icon-size: 16px;
   color: rgba(255, 255, 255, 0.3);
 }
 
+/* Notifications */
+
+.notification-card {
+  background-color: rgba($background-color, 0.9);
+  border: 2px solid $border-color;
+  border-radius: $border-radius;
+  padding: 15px;
+  margin-bottom: 8px;
+  min-width: 340px;
+}
+
+.notification-icon {
+  margin-right: 12px;
+}
+
+.notification-app {
+  font-size: 11px;
+  color: $fg-muted-color;
+  font-weight: bold;
+}
+
+.notification-dismiss {
+  padding: 2px 6px;
+  border-radius: $border-radius;
+  border: 1px solid transparent;
+  font-size: 16px;
+  font-weight: bold;
+  color: $fg-muted-color;
+  transition: all 0.2s ease;
+}
+
+.notification-dismiss:hover {
+  background-color: $overlay-hover-color;
+  border-color: $primary-color;
+  color: $fg-color;
+}
+
+.notification-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: $fg-color;
+  margin-top: 4px;
+}
+
+.notification-body {
+  font-size: 12px;
+  color: $fg-muted-color;
+  margin-top: 4px;
+}
+
