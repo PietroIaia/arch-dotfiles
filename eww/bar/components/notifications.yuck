@@ -55,7 +55,7 @@
     :orientation "v"
     :valign "start"
     :space-evenly false
-    :style "margin-top: ${popup_open == 'calendar-popup' ? '400' : popup_open == 'network-popup' ? '350' : popup_open == 'volume-popup' ? '100' : '0'}px;"
+    :style "margin-top: ${popup_open == 'calendar-window' ? '400' : popup_open == 'network-window' ? '350' : popup_open == 'volume-window' ? '100' : '0'}px;"
     (for n in notifications
       (notification_card :n n))
   )

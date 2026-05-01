@@ -6,7 +6,7 @@
     secondary:      #340152;
     bg:             #3a2987;
     hover:          rgba(47, 12, 70, 0.7);
-    overlay-bg:     rgba(58, 41, 135, 0.7);
+    overlay-bg:     rgba(58, 41, 135, 0.93);
     overlay-hover:  rgba(205, 154, 229, 0.2);
     border-col:     #ffffff;
     accent:         #0fcbf1;

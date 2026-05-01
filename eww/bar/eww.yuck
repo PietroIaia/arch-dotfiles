@@ -18,7 +18,7 @@
 )
 
 ;; Calendar popup window
-(defwindow calendar-popup
+(defwindow calendar-window
   :geometry (geometry
     :x "5px"
     :y "5px"

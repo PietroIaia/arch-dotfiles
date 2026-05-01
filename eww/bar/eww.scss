@@ -404,7 +404,7 @@ $icon-size: 16px;
 /* Notifications */
 
 .notification-card {
-  background-color: rgba($background-color, 0.9);
+  background-color: $overlay-background-color;
   border: 2px solid $border-color;
   border-radius: $border-radius;
   padding: 15px;

@@ -5,7 +5,7 @@
 (defwidget power_button [monitor]
   (button
     :class "widget power"
-    :onclick "~/.config/eww/scripts/toggle-popup.sh power-overlay ${monitor}"
+    :onclick "~/.config/eww/scripts/toggle-popup.sh power-window ${monitor}"
     (label
       :text "⏻"
     )
@@ -78,7 +78,7 @@
 )
 
 ;; Overlay window definition
-(defwindow power-overlay
+(defwindow power-window
   :geometry (geometry
     :x "0%"
     :y "0%"

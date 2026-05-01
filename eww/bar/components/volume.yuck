@@ -2,7 +2,7 @@
 (defwidget volume_button [monitor]
   (button
     :class "widget volume"
-    :onclick "~/.config/eww/scripts/toggle-popup.sh volume-popup ${monitor}"
+    :onclick "~/.config/eww/scripts/toggle-popup.sh volume-window ${monitor}"
     (label
       :text "${volume_muted == 'true' ? '' : volume >= 66 ? '' : volume >= 33 ? '' : ''}"
     )
@@ -33,7 +33,7 @@
 )
 
 ;; Volume popup window
-(defwindow volume-popup
+(defwindow volume-window
   :geometry (geometry
     :x "5px"
     :y "5px"

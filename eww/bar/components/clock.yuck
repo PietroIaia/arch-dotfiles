@@ -2,7 +2,7 @@
 (defwidget clock [monitor]
   (button
     :class "widget clock"
-    :onclick "~/.config/eww/scripts/toggle-popup.sh calendar-popup ${monitor}"
+    :onclick "~/.config/eww/scripts/toggle-popup.sh calendar-window ${monitor}"
     (box
       :orientation "h"
       :space-evenly false

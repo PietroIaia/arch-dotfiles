@@ -5,7 +5,7 @@
 (defwidget wifi_button [monitor]
   (button
     :class "widget network"
-    :onclick "~/.config/eww/scripts/toggle-popup.sh network-popup ${monitor}"
+    :onclick "~/.config/eww/scripts/toggle-popup.sh network-window ${monitor}"
     (box
       :orientation "h"
       :space-evenly false
@@ -101,7 +101,7 @@
 )
 
 ;; Popup window definition
-(defwindow network-popup
+(defwindow network-window
   :geometry (geometry
     :x "5px"
     :y "5px"
