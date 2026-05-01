@@ -8,6 +8,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PALETTE="$ROOT/palette.toml"
 EWW_OUT="$HOME/.config/eww/bar/_palette.scss"
 ROFI_OUT="$HOME/.config/rofi/_palette.rasi"
+FASTFETCH_OUT="$HOME/.config/fastfetch/config.jsonc"
 
 if [[ ! -f "$PALETTE" ]]; then
   echo "error: $PALETTE not found" >&2
@@ -65,6 +66,23 @@ cat > "$ROFI_OUT" <<EOF
 }
 EOF
 
+# Fastfetch can't @import a partial like eww/rofi, and randomize_picture.sh
+# rewrites config.jsonc on every run, so we sweep palette-bound SGR escapes
+# in-place. Targets only `[38;2;R;G;Bm` truecolor sequences — bold/reset
+# and named-color SGRs are untouched.
+hex_to_sgr_rgb() {
+  local hex=${1#\#}
+  printf '%d;%d;%d' "0x${hex:0:2}" "0x${hex:2:2}" "0x${hex:4:2}"
+}
+
+if [[ -f "$FASTFETCH_OUT" ]]; then
+  C_PRIMARY_SGR=$(hex_to_sgr_rgb "$C_PRIMARY")
+  sed -i -E \
+    "s/\\\\u001b\\[38;2;[0-9]+;[0-9]+;[0-9]+m/\\\\u001b[38;2;${C_PRIMARY_SGR}m/g" \
+    "$FASTFETCH_OUT"
+fi
+
 echo "Rendered:"
 echo "  $EWW_OUT"
 echo "  $ROFI_OUT"
+[[ -f "$FASTFETCH_OUT" ]] && echo "  $FASTFETCH_OUT (in-place SGR sweep)"

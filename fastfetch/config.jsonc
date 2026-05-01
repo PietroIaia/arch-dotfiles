@@ -3,8 +3,8 @@
     "logo": {
         "type": "auto",
         "source": "~/.config/fastfetch/pictures/random.png",
-        "width": 14,
-        "height": 10,
+        "width": 24,
+        "height": 9,
         "padding": {
             "top": 1,
             "left": 1,
@@ -18,12 +18,12 @@
         },
         "constants": [
             "──────────────────────────────────────────────────",
-            "│\u001b[50C│\u001b[50D"
+            "\u001b[38;2;205;154;229m│\u001b[50C│\u001b[50D"
         ]
     },
     "modules": [
         {
-            "format": "{#1}{#keys}╭{$1}╮\u001b[51D {user-name-colored}{at-symbol-colored}{host-name-colored} ",
+            "format": "\u001b[38;2;205;154;229m╭{$1}╮\u001b[51D \u001b[1m{user-name}@{host-name} \u001b[22m",
             "type": "title"
         },
         {
@@ -48,7 +48,7 @@
             "format": "{ipv4} ({ifname})"
         },
         {
-            "format": "{#1}{#keys}├{$1}┤\u001b[50D Hardware ",
+            "format": "\u001b[38;2;205;154;229m├{$1}┤\u001b[50D Hardware ",
             "type": "custom"
         },
         {
@@ -66,7 +66,7 @@
             "type": "memory"
         },
         {
-            "format": "{#1}{#keys}├{$1}┤\u001b[50D Disks ",
+            "format": "\u001b[38;2;205;154;229m├{$1}┤\u001b[50D Disks ",
             "type": "custom"
         },
         {
@@ -82,7 +82,7 @@
             "folders": "/home"
         },
         {
-            "format": "{#1}{#keys}├{$1}┤\u001b[50D Diagnostics ",
+            "format": "\u001b[38;2;205;154;229m├{$1}┤\u001b[50D Diagnostics ",
             "type": "custom"
         },
         {
@@ -107,7 +107,7 @@
             "text": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader 2>/dev/null | awk '{v=$1+0; c=(v<60)?\"\\033[32m\":(v<80)?\"\\033[33m\":\"\\033[31m\"; printf \"%s%.1f°C\\033[0m\",c,v}'"
         },
         {
-            "format": "{#1}{#keys}╰{$1}╯",
+            "format": "\u001b[38;2;205;154;229m╰{$1}╯",
             "type": "custom"
         }
     ]
