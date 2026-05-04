@@ -1,4 +1,7 @@
-;; Clock widget
+;; Clock/Calendar Widget
+;; Displays date and time in the bar and provides a popup with a calendar
+
+;; Main clock button widget that appears in the settings bar
 (defwidget clock [monitor]
   (button
     :class "widget clock"
@@ -18,7 +21,7 @@
   )
 )
 
-;; Calendar popup widget
+;; Popup widget with calendar and clock
 (defwidget calendar_popup []
   (box
     :class "calendar-popup"
@@ -63,4 +66,18 @@
       (label :text "Today")
     )
   )
+)
+
+;; Popup window definition
+(defwindow calendar-window
+  :geometry (geometry
+    :x "5px"
+    :y "5px"
+    :width "320px"
+    :anchor "top right"
+  )
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (calendar_popup)
 )

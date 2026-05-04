@@ -17,20 +17,6 @@
   (notification_stack)
 )
 
-;; Calendar popup window
-(defwindow calendar-window
-  :geometry (geometry
-    :x "5px"
-    :y "5px"
-    :width "320px"
-    :anchor "top right"
-  )
-  :stacking "overlay"
-  :exclusive false
-  :focusable false
-  (calendar_popup)
-)
-
 ;; Click-catchers: one per monitor, positioned below the bar so bar buttons remain clickable.
 ;; Both open whenever a popup opens; clicking either closes the active popup.
 (defwindow click-catcher-0

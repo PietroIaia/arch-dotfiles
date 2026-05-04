@@ -2,6 +2,7 @@
 # Consumed by ~/.config/colors/render.sh which generates:
 #   ~/.config/eww/bar/_palette.scss
 #   ~/.config/rofi/_palette.rasi
+#   ~/.config/colors/_kde.colors  (symlinked into ~/.local/share/color-schemes/)
 #
 # After editing, run: ~/.config/colors/render.sh
 
@@ -9,6 +10,7 @@
 primary            = "#cd9ae5"
 secondary          = "#340152"
 background         = "#3a2987"
+view-bg            = "#0f0f14"
 hover              = "rgba(47, 12, 70, 0.7)"
 overlay-background = "rgba(58, 41, 135, 0.93)"
 overlay-hover      = "rgba(205, 154, 229, 0.2)"
