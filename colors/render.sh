@@ -190,6 +190,65 @@ inactiveForeground=$K_FG_MUTED
 EOF
 } > "$KDE_OUT"
 
+# LibreOffice. UI chrome is themed via the kf6 VCL plugin (SAL_USE_VCLPLUGIN
+# in hyprland.conf) which picks up the KDE scheme above. This block only
+# touches the document-area Application Colors (cell/canvas bg, Calc grid,
+# font, links) and the icon symbol style. The xcu is rewritten by LibreOffice
+# on exit, so close it before re-running this script.
+LO_XCU="$HOME/.config/libreoffice/4/user/registrymodifications.xcu"
+LO_SCHEME="COLOR_SCHEME_LIBREOFFICE_AUTOMATIC"
+LO_ICON="breeze_dark"
+
+hex_to_lo_int() {
+  local hex=${1#\#}
+  printf '%d' "$(( 0x${hex:0:2} * 65536 + 0x${hex:2:2} * 256 + 0x${hex:4:2} ))"
+}
+
+if [[ -f "$LO_XCU" ]]; then
+  if pgrep -x soffice.bin >/dev/null 2>&1; then
+    echo "warn: LibreOffice is running — close it before re-running, or these xcu edits will be clobbered on exit." >&2
+  fi
+
+  LO_DOC=$(hex_to_lo_int   "$C_VIEW_BG")
+  LO_FONT=$(hex_to_lo_int  "$C_FG")
+  LO_GRID=$(hex_to_lo_int  "$C_FG_MUTED")
+  LO_LINK=$(hex_to_lo_int  "$C_ACCENT")
+  LO_VLINK=$(hex_to_lo_int "$C_PRIMARY")
+
+  LO_CS="/org.openoffice.Office.UI/ColorScheme/ColorSchemes/org.openoffice.Office.UI:ColorScheme['${LO_SCHEME}']"
+
+  LO_ITEMS=(
+    "/org.openoffice.Office.Common/Misc|SymbolStyle|$LO_ICON"
+    "${LO_CS}/DocColor|Color|$LO_DOC"
+    "${LO_CS}/FontColor|Color|$LO_FONT"
+    "${LO_CS}/CalcGrid|Color|$LO_GRID"
+    "${LO_CS}/Links|Color|$LO_LINK"
+    "${LO_CS}/LinksVisited|Color|$LO_VLINK"
+  )
+
+  LO_TARGETS=$(printf '%s\n' "${LO_ITEMS[@]}" | awk -F'|' '{print $1"|"$2}')
+  LO_INJECT=$(printf '%s\n' "${LO_ITEMS[@]}" | awk -F'|' '{
+    printf "<item oor:path=\"%s\"><prop oor:name=\"%s\" oor:op=\"fuse\"><value>%s</value></prop></item>\n", $1, $2, $3
+  }')
+
+  LO_TMP=$(mktemp)
+  awk -v targets="$LO_TARGETS" -v inject="$LO_INJECT" '
+    BEGIN {
+      n = split(targets, lines, "\n")
+      for (i=1; i<=n; i++) if (lines[i] != "") keys[lines[i]] = 1
+    }
+    {
+      p = ""; nm = ""
+      if (match($0, /oor:path="[^"]*"/))  p  = substr($0, RSTART+10, RLENGTH-11)
+      if (match($0, /oor:name="[^"]*"/))  nm = substr($0, RSTART+10, RLENGTH-11)
+      if (p != "" && nm != "" && ((p "|" nm) in keys)) next
+      if ($0 ~ /<\/oor:items>/) { print inject; print; next }
+      print
+    }
+  ' "$LO_XCU" > "$LO_TMP"
+  mv "$LO_TMP" "$LO_XCU"
+fi
+
 echo "Rendered:"
 echo "  $EWW_OUT"
 echo "  $ROFI_OUT"
@@ -197,3 +256,4 @@ echo "  $KITTY_OUT"
 echo "  $NVIM_OUT"
 echo "  $KDE_OUT"
 [[ -f "$FASTFETCH_OUT" ]] && echo "  $FASTFETCH_OUT (in-place SGR sweep)"
+[[ -f "$LO_XCU"        ]] && echo "  $LO_XCU (in-place xcu patch)"

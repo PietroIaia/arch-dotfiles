@@ -31,7 +31,7 @@ else
     # Only laptop connected - it becomes monitor 0, show workspaces 1-5
 
     hyprctl dispatch workspace 1 > /dev/null
-    
+
     eww open primary-bar --screen $LAPTOP_ID
     eww open notifications-window --screen $LAPTOP_ID
 
