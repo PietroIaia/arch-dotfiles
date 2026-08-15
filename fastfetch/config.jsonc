@@ -3,8 +3,8 @@
     "logo": {
         "type": "auto",
         "source": "~/.config/fastfetch/pictures/random.png",
-        "width": 24,
-        "height": 9,
+        "width": 27,
+        "height": 12,
         "padding": {
             "top": 1,
             "left": 1,

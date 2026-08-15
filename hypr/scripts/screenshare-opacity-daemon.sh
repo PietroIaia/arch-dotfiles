@@ -83,7 +83,10 @@ reconcile
 
 last_reconcile_ms=0
 pw-mon 2>/dev/null | while IFS= read -r _; do
-    now_ms=$(date +%s%3N)
+    # $EPOCHREALTIME is a bash builtin (no fork per event); format is secs<radix>micros.
+    secs=${EPOCHREALTIME%[.,]*}
+    micros=${EPOCHREALTIME#*[.,]}
+    now_ms=$(( secs * 1000 + 10#$micros / 1000 ))
     if (( now_ms - last_reconcile_ms >= RECONCILE_MS )); then
         last_reconcile_ms=$now_ms
         reconcile

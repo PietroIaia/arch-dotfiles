@@ -1,6 +1,9 @@
 #!/bin/bash
-MONTH=$(eww get cal_month)
-YEAR=$(eww get cal_year)
+# Usage: cal-grid.sh [month] [year]
+# cal-nav.sh already knows the month/year it just computed, so it passes them in
+# rather than making us round-trip back to the daemon for values it set itself.
+MONTH="${1:-$(eww get cal_month)}"
+YEAR="${2:-$(eww get cal_year)}"
 TODAY_MONTH=$(date +%-m)
 TODAY_YEAR=$(date +%Y)
 TODAY_DAY=$(date +%-d)

@@ -2,20 +2,36 @@
 (include "./bar/components/bar.yuck")
 (include "./bar/components/notifications.yuck")
 
-;; Notification window — opened alongside bars at startup
-(defwindow notifications-window
-  :geometry (geometry
-    :x "5px"
-    :y "5px"
-    :width "360px"
-    :height "95%"
-    :anchor "top right"
-  )
-  :stacking "overlay"
-  :exclusive false
-  :focusable false
-  (notification_stack)
-)
+;; Notification slots — one window per visible card. Each window is sized to a
+;; single card (360x130) so the gaps between cards and the rest of the screen
+;; pass clicks through to whatever is underneath. The daemon owns the lifecycle
+;; of each window and pushes the card JSON into the matching slot_N var.
+;; Placeholder geometry — overridden at open time by the daemon via `eww open
+;; --pos <x>x<y> --size 360x<h>`, so per-slot y and height are dynamic.
+(defwindow notif-slot-0
+  :geometry (geometry :x "5px" :y "5px" :width "360px" :height "100px" :anchor "top right")
+  :stacking "overlay" :exclusive false :focusable false
+  (notification_card :n slot_0))
+
+(defwindow notif-slot-1
+  :geometry (geometry :x "5px" :y "5px" :width "360px" :height "100px" :anchor "top right")
+  :stacking "overlay" :exclusive false :focusable false
+  (notification_card :n slot_1))
+
+(defwindow notif-slot-2
+  :geometry (geometry :x "5px" :y "5px" :width "360px" :height "100px" :anchor "top right")
+  :stacking "overlay" :exclusive false :focusable false
+  (notification_card :n slot_2))
+
+(defwindow notif-slot-3
+  :geometry (geometry :x "5px" :y "5px" :width "360px" :height "100px" :anchor "top right")
+  :stacking "overlay" :exclusive false :focusable false
+  (notification_card :n slot_3))
+
+(defwindow notif-slot-4
+  :geometry (geometry :x "5px" :y "5px" :width "360px" :height "100px" :anchor "top right")
+  :stacking "overlay" :exclusive false :focusable false
+  (notification_card :n slot_4))
 
 ;; Click-catchers: one per monitor, positioned below the bar so bar buttons remain clickable.
 ;; Both open whenever a popup opens; clicking either closes the active popup.

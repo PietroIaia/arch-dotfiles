@@ -1,15 +1,23 @@
 ;; Popup state
 (defvar popup_open "none")
 
-;; Notification list — driven by notification-daemon.py via D-Bus
-(deflisten notifications
-  :initial "[]"
-  `~/.config/eww/scripts/notification-daemon.py`)
+;; Notification slots — each holds one notification (JSON object) or "{}" when empty.
+;; Geometry per slot is set by the daemon at open time via `eww open --pos --size`,
+;; so the placeholder geometry in the defwindow is overridden every time.
+(defvar slot_0 "{}")
+(defvar slot_1 "{}")
+(defvar slot_2 "{}")
+(defvar slot_3 "{}")
+(defvar slot_4 "{}")
 
-;; Calendar popup state
+;; Calendar popup state. Like cal_month/cal_year, cal_grid is event-driven, not
+;; polled: cal-nav.sh rewrites all three on nav, and toggle-popup.sh runs
+;; `cal-nav.sh reset` before opening the popup, so they are always current by
+;; the time the window renders. Polling the grid meant the daemon spawning a
+;; script that queried the daemon twice a second, forever, even while closed.
 (defvar cal_month 4)
 (defvar cal_year 2026)
-(defpoll cal_grid :interval "500ms" "~/.config/eww/scripts/cal-grid.sh")
+(defvar cal_grid "(box)")
 
 ;; Workspace variables (event-driven via Hyprland socket2 — no polling lag)
 (deflisten monitor0_workspace "~/.config/eww/scripts/hypr-monitor-ws.sh 0")
@@ -29,15 +37,4 @@
 (defpoll wifi_connected :interval "2s" "nmcli -t -f DEVICE,TYPE,STATE device | grep -q 'wifi:connected' && echo 'yes' || echo 'no'")
 (defpoll wifi_ssid :interval "2s" "nmcli -t -f active,ssid device wifi | grep '^yes' | cut -d':' -f2")
 (defpoll wifi_strength :interval "2s" "nmcli -t -f active,signal device wifi | grep '^yes' | cut -d':' -f2")
-(defpoll wifi_networks :interval "5s"
-  `echo "(box :orientation \\"v\\" :space-evenly false" && nmcli -t -f SSID,SIGNAL,SECURITY device wifi list | awk -F: 'length($1) > 0' | head -n 10 | awk -F: '
-    {
-      ssid = $1;
-      signal = $2;
-      security = $3;
-      icon = (signal >= 75) ? "󰤨" : (signal >= 50) ? "󰤥" : (signal >= 25) ? "󰤢" : "󰤟";
-      lock = (security != "") ? "🔒" : "";
-      printf "(box :class \\"network-item\\" :orientation \\"h\\" :space-evenly true (button :class \\"network-connect\\" :onclick \\"nmcli device wifi connect %s\\" (box :orientation \\"h\\" :space-evenly false (label :class \\"network-icon\\" :text \\"%s\\") (label :class \\"network-lock\\" :text \\"%s\\") (label :class \\"network-name\\" :text \\"%s\\" :halign \\"start\\" :hexpand true) (label :class \\"network-signal\\" :text \\"%d%%\\"))))", ssid, icon, ssid, lock, signal;
-    }
-  ' && echo ")"`
-)
+(defpoll wifi_networks :interval "10s" "~/.config/eww/scripts/wifi-networks.sh")

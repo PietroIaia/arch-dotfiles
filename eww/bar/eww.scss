@@ -403,18 +403,11 @@ $icon-size: 16px;
 
 /* Notifications */
 
-.notification-anchor {
-  min-width: 1px;
-  min-height: 1px;
-  background-color: rgba(0, 0, 0, 0.01);
-}
-
 .notification-card {
   background-color: $overlay-background-color;
   border: 2px solid $border-color;
   border-radius: $border-radius;
   padding: 15px;
-  margin-bottom: 8px;
   min-width: 340px;
 }
 
@@ -449,11 +442,13 @@ $icon-size: 16px;
   font-weight: bold;
   color: $fg-color;
   margin-top: 4px;
+  min-width: 0;
 }
 
 .notification-body {
   font-size: 12px;
   color: $fg-muted-color;
   margin-top: 4px;
+  min-width: 0;
 }
 

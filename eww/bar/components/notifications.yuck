@@ -1,4 +1,4 @@
-;; Single notification card
+;; Single notification card. `n` is the parsed JSON object pushed into a slot var.
 (defwidget notification_card [n]
   (box
     :class "notification-card ${n.urgency}"
@@ -34,34 +34,16 @@
       (label
         :class "notification-title"
         :text "${n.summary}"
-        :halign "start"
-        :wrap true
+        :xalign 0
+        :hexpand true
       )
       (label
         :class "notification-body"
         :text "${n.body}"
-        :halign "start"
-        :wrap true
+        :xalign 0
+        :hexpand true
         :visible "${n.body != ''}"
       )
-    )
-  )
-)
-
-;; Notification stack — pushes cards below the bar and any open popup
-(defwidget notification_stack []
-  (box
-    :orientation "v"
-    :valign "start"
-    :space-evenly false
-    (box :class "notification-anchor")
-    (box
-      :class "notification-stack"
-      :orientation "v"
-      :space-evenly false
-      :style "margin-top: ${popup_open == 'calendar-window' ? '400' : popup_open == 'network-window' ? '350' : popup_open == 'volume-window' ? '100' : '0'}px;"
-      (for n in notifications
-        (notification_card :n n))
     )
   )
 )
