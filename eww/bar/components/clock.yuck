@@ -4,7 +4,7 @@
 ;; Main clock button widget that appears in the settings bar
 (defwidget clock [monitor]
   (button
-    :class "widget clock"
+    :class "widget clock ${popup_open == 'calendar-window' ? 'active' : ''}"
     :onclick "~/.config/eww/scripts/toggle-popup.sh calendar-window ${monitor}"
     (box
       :orientation "h"

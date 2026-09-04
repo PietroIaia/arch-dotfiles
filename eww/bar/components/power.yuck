@@ -4,7 +4,7 @@
 ;; Main power button widget that appears in the settings bar
 (defwidget power_button [monitor]
   (button
-    :class "widget power"
+    :class "widget power ${popup_open == 'power-window' ? 'active' : ''}"
     :onclick "~/.config/eww/scripts/toggle-popup.sh power-window ${monitor}"
     (label
       :text "⏻"

@@ -13,6 +13,7 @@ $icon-size: 16px;
 .widget {
   background-color: $background-color;
   border-radius: $border-radius;
+  border: 1px solid transparent;
   margin: 0 2px;
   font-weight: bold;
   transition: all 0.2s ease;
@@ -34,7 +35,6 @@ $icon-size: 16px;
 .workspace {
   padding: 9px;
   min-width: 17px;
-  border: 1px solid transparent;
 }
 
 .workspaces {
@@ -265,7 +265,12 @@ $icon-size: 16px;
 .power {
   margin-right: 5px;
   padding: 5px 10px;
-  font-size: $icon-size;
+  // U+23FB also exists in Adwaita Mono, which fontconfig picks over the Nerd
+  // Font for the sans base family — rendering it larger and heavier than the
+  // other bar icons. Pin the face the volume/battery/wifi/clock icons use.
+  font-family: "JetBrainsMono Nerd Font Mono";
+  // Nudged up from $icon-size to sit right next to the other bar icons.
+  font-size: $icon-size + 2;
   color: red;
 }
 

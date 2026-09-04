@@ -4,7 +4,7 @@
 ;; Main WiFi button widget that appears in the settings bar
 (defwidget wifi_button [monitor]
   (button
-    :class "widget network"
+    :class "widget network ${popup_open == 'network-window' ? 'active' : ''}"
     :onclick "~/.config/eww/scripts/toggle-popup.sh network-window ${monitor}"
     (box
       :orientation "h"
