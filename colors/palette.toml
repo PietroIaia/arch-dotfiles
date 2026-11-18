@@ -2,7 +2,14 @@
 # Consumed by ~/.config/colors/render.sh which generates:
 #   ~/.config/eww/bar/_palette.scss
 #   ~/.config/rofi/_palette.rasi
+#   ~/.config/kitty/_palette.conf
+#   ~/.config/nvim/lua/_palette.lua
+#   ~/.config/gtk-3.0/_palette.css
+#   ~/.config/gtk-4.0/_palette.css
+#   ~/.config/hypr/_palette.lua
 #   ~/.config/colors/_kde.colors  (symlinked into ~/.local/share/color-schemes/)
+#   ~/.config/fastfetch/config.jsonc, LibreOffice xcu  (patched in place)
+#   ~/Mahisoft Vault/.obsidian/snippets/palette.css  (Obsidian / AnuPpuccin)
 #
 # After editing, run: ~/.config/colors/render.sh
 

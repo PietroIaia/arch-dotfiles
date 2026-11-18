@@ -7,7 +7,7 @@
     (for ws in "[${start}, ${start + 1}, ${start + 2}, ${start + 3}, ${start + 4}]"
       (button
         :class "widget workspace ${(monitor == 0 ? monitor0_workspace : monitor1_workspace) == ws ? "active" : ""}"
-        :onclick "hyprctl dispatch workspace ${ws}"
+        :onclick "hyprctl dispatch 'hl.dsp.focus({ workspace = ${ws} })'"
         "${ws}"
       )
     )

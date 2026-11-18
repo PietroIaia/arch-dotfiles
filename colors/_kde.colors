@@ -90,6 +90,20 @@ ForegroundPositive=15,203,241
 DecorationFocus=15,203,241
 DecorationHover=205,154,229
 
+[Colors:Header][Inactive]
+BackgroundNormal=52,1,82
+BackgroundAlternate=58,41,135
+ForegroundNormal=255,255,255
+ForegroundInactive=184,184,184
+ForegroundActive=15,203,241
+ForegroundLink=15,203,241
+ForegroundVisited=205,154,229
+ForegroundNegative=231,76,60
+ForegroundNeutral=205,154,229
+ForegroundPositive=15,203,241
+DecorationFocus=15,203,241
+DecorationHover=205,154,229
+
 [Colors:Selection]
 BackgroundNormal=205,154,229
 BackgroundAlternate=205,154,229
@@ -109,3 +123,12 @@ activeBackground=58,41,135
 activeForeground=255,255,255
 inactiveBackground=52,1,82
 inactiveForeground=184,184,184
+
+# Breeze ships this disabled; state it rather than inherit a default, so an
+# unfocused window is never desaturated away from the palette.
+[ColorEffects:Inactive]
+Enable=false
+ChangeSelectionColor=false
+ColorEffect=0
+ContrastEffect=0
+IntensityEffect=0

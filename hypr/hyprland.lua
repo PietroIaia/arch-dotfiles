@@ -3,7 +3,8 @@
 -- https://wiki.hypr.land/Configuring/                   --
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local home = os.getenv("HOME")
+local home    = os.getenv("HOME")
+local palette = dofile(home .. "/.config/hypr/_palette.lua")
 
 ------------------
 ---- MONITORS ----
@@ -44,6 +45,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd(home .. "/.config/hypr/scripts/capslock-cursor.py")
     hl.exec_cmd(home .. "/.config/hypr/scripts/screenshare-opacity-daemon.sh")
     hl.exec_cmd(home .. "/.config/eww/scripts/notification-daemon.py")
+    hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
     hl.exec_cmd("swaybg --image " .. home .. "/Pictures/Purple_alt.png")
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")
     hl.exec_cmd("systemctl --user stop plasma-dolphin.service")
@@ -79,8 +81,8 @@ hl.config({
         border_size = 2,
 
         col = {
-            active_border   = "rgba(ffffffff)",
-            inactive_border = "rgba(340152ff)",
+            active_border   = "rgba(" .. palette.border .. "ff)",
+            inactive_border = "rgba(" .. palette.secondary .. "ff)",
         },
 
         resize_on_border = true,
@@ -290,4 +292,12 @@ hl.window_rule({
 
     float  = true,
     center = true,
+})
+
+-- Rofi-style corners on dialogs and every other floating window.
+hl.window_rule({
+    name  = "popup-rounding",
+    match = { float = true },
+
+    rounding = palette.radius,
 })

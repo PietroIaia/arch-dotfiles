@@ -26,16 +26,39 @@ log "daemon start pid=$$"
 # worst-case latency for state changes regardless of event rate.
 RECONCILE_MS=200
 
-HYPR_CONF="$HOME/.config/hypr/hyprland.conf"
+# The live config: hyprland.lua since 0.56, with hyprland.conf as the fallback.
+HYPR_CONF="$HOME/.config/hypr/hyprland.lua"
+[[ -f "$HYPR_CONF" ]] || HYPR_CONF="$HOME/.config/hypr/hyprland.conf"
 
 # The "default" opacity to restore to when a share ends. Read from the on-disk
 # config rather than the live runtime value, so a daemon that was killed mid-
 # share and restarted doesn't snapshot a polluted "1.0" as the baseline.
+# The trailing-comma strip is what makes this work on the Lua config too.
 read_conf_opacity() {
     local key=$1
     grep -E "^[[:space:]]*${key}[[:space:]]*=" "$HYPR_CONF" \
         | tail -1 \
-        | sed -E "s/.*=[[:space:]]*//; s/[[:space:]#].*//"
+        | sed -E "s/.*=[[:space:]]*//; s/[[:space:],#].*//"
+}
+
+# On a Lua config, `hyprctl keyword` is dead: 0.56 rejects it ("keyword can't
+# work with non-legacy parsers. Use eval.") and 0.57 removed it ("unknown
+# request"). Either way it fails silently when its output is discarded. So
+# probe for a working `eval` (a Lua no-op answers "ok") rather than for a
+# specific keyword error message; fall back to keyword on a legacy .conf session.
+if [[ $(hyprctl eval "local _ = 1" 2>&1) == ok ]]; then
+    lua_parser=1
+else
+    lua_parser=0
+fi
+
+set_opacity() {
+    if (( lua_parser )); then
+        hyprctl eval "hl.config({ decoration = { active_opacity = $1, inactive_opacity = $2 } })" >/dev/null
+    else
+        hyprctl keyword decoration:active_opacity "$1" >/dev/null
+        hyprctl keyword decoration:inactive_opacity "$2" >/dev/null
+    fi
 }
 
 is_sharing() {
@@ -53,15 +76,15 @@ log "config opacity: active=$conf_active inactive=$conf_inactive"
 sharing=0
 
 start_share() {
-    hyprctl keyword decoration:active_opacity 1 >/dev/null
-    hyprctl keyword decoration:inactive_opacity 1 >/dev/null
+    set_opacity 1 1
     sharing=1
     log "start_share: opacity -> 1"
 }
 
 stop_share() {
-    [[ -n "$conf_active" ]]   && hyprctl keyword decoration:active_opacity   "$conf_active"   >/dev/null
-    [[ -n "$conf_inactive" ]] && hyprctl keyword decoration:inactive_opacity "$conf_inactive" >/dev/null
+    if [[ -n "$conf_active" && -n "$conf_inactive" ]]; then
+        set_opacity "$conf_active" "$conf_inactive"
+    fi
     sharing=0
     log "stop_share: opacity -> active=$conf_active inactive=$conf_inactive"
 }

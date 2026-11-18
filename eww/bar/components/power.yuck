@@ -64,7 +64,7 @@
         )
         (button
           :class "power-option"
-          :onclick "~/.config/eww/scripts/close-popup.sh && hyprctl dispatch exit"
+          :onclick "~/.config/eww/scripts/close-popup.sh && hyprctl dispatch 'hl.dsp.exit()'"
           (box
             :orientation "v"
             :space-evenly false

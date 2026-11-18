@@ -111,7 +111,7 @@ $icon-size: 16px;
 }
 
 .battery-icon.low {
-  color: #E74C3C;
+  color: $urgent-color;
 }
 
 .battery-icon.charging {
@@ -126,7 +126,7 @@ $icon-size: 16px;
 .network {
   padding: 5px 10px;
   font-size: 16px;
-  color: #0fcbf1;
+  color: $accent-color;
 }
 
 .network-popup {
@@ -141,7 +141,7 @@ $icon-size: 16px;
   margin-left: 15px;
   font-size: 12px;
   font-weight: bold;
-  color: #ffffff;
+  color: $fg-color;
 }
 
 .network-toggle {
@@ -175,7 +175,7 @@ $icon-size: 16px;
 
 .network-current-label {
   font-size: 12px;
-  color: #b8b8b8;
+  color: $fg-muted-color;
   margin-bottom: 5px;
 }
 
@@ -210,7 +210,7 @@ $icon-size: 16px;
 
 .network-list-label {
   font-size: 12px;
-  color: #b8b8b8;
+  color: $fg-muted-color;
   margin-bottom: 8px;
 }
 
@@ -236,13 +236,13 @@ $icon-size: 16px;
 
 .network-icon {
   font-size: 14px;
-  color: #0fcbf1;
+  color: $accent-color;
   margin-right: 15px;
 }
 
 .network-name {
   font-size: 13px;
-  color: #ffffff;
+  color: $fg-color;
 }
 
 .network-lock {
@@ -257,7 +257,7 @@ $icon-size: 16px;
 
 .network-disabled-msg {
   font-size: 14px;
-  color: #b8b8b8;
+  color: $fg-muted-color;
   padding: 20px;
 }
 
@@ -311,7 +311,7 @@ $icon-size: 16px;
 
 .power-label {
   font-size: 14px;
-  color: #ffffff;
+  color: $fg-color;
   font-weight: bold;
 }
 
@@ -327,7 +327,7 @@ $icon-size: 16px;
 .cal-clock {
   font-size: 36px;
   font-weight: bold;
-  color: #ffffff;
+  color: $fg-color;
   margin-bottom: 5px;
 }
 
@@ -344,7 +344,7 @@ $icon-size: 16px;
 .cal-month-label {
   font-size: 14px;
   font-weight: bold;
-  color: #ffffff;
+  color: $fg-color;
 }
 
 .cal-nav-btn {
@@ -352,7 +352,7 @@ $icon-size: 16px;
   border-radius: $border-radius;
   border: 1px solid transparent;
   font-size: 14px;
-  color: #ffffff;
+  color: $fg-color;
   transition: all 0.2s ease;
 }
 
@@ -378,7 +378,7 @@ $icon-size: 16px;
 
 /* Calendar grid - custom bash-generated cells */
 .cal-day-name {
-  color: #b8b8b8;
+  color: $fg-muted-color;
   font-size: 11px;
   font-weight: bold;
   min-width: 32px;
@@ -386,7 +386,7 @@ $icon-size: 16px;
 }
 
 .cal-day {
-  color: #ffffff;
+  color: $fg-color;
   font-size: 13px;
   min-width: 32px;
   border-radius: $border-radius;

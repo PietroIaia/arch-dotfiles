@@ -160,8 +160,10 @@ fn restore_specific_window(window_id: &str) -> io::Result<()> {
     let move_from_special = Command::new("hyprctl")
         .args([
             "dispatch",
-            "movetoworkspace",
-            &format!("{},address:{}", current_ws, window_id),
+            &format!(
+                "hl.dsp.window.move({{ workspace = {}, window = 'address:{}' }})",
+                current_ws, window_id
+            ),
         ])
         .output()?;
 
@@ -171,7 +173,10 @@ fn restore_specific_window(window_id: &str) -> io::Result<()> {
     );
 
     let focus_cmd = Command::new("hyprctl")
-        .args(["dispatch", "focuswindow", &format!("address:{}", window_id)])
+        .args([
+            "dispatch",
+            &format!("hl.dsp.focus({{ window = 'address:{}' }})", window_id),
+        ])
         .output()?;
 
     println!("Focus command result: {:?}", focus_cmd);
@@ -300,8 +305,10 @@ fn minimize_window() -> Result<(), io::Error> {
     let output = Command::new("hyprctl")
         .args([
             "dispatch",
-            "movetoworkspacesilent",
-            &format!("special:minimum,address:{}", window_addr),
+            &format!(
+                "hl.dsp.window.move({{ workspace = 'special:minimum', window = 'address:{}', follow = false }})",
+                window_addr
+            ),
         ])
         .output()?;
 
