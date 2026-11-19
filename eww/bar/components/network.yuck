@@ -23,7 +23,7 @@
       )
       (label
         :class "network-title"
-        :text "${wifi_ssid}"
+        :text wifi_ssid_label
       )
     )
   )

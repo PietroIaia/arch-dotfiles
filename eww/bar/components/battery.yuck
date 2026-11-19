@@ -44,7 +44,7 @@
       )
       (label
         :class "battery-label"
-        :text "${battery_percent}%"
+        :text battery_label
       )
     )
   )

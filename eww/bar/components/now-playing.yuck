@@ -1,0 +1,21 @@
+;; Read-only island showing the MPRIS player picked by now-playing.py; hidden when nothing plays
+;; Centred, so the script's reveal animation grows and shrinks it from the middle
+(defwidget now_playing [chars]
+    (box
+      :class "widget now-playing ${now_playing.status == 'Paused' ? 'paused' : ''}"
+      :orientation "h"
+      :halign "center"
+      :visible {now_playing.visible}
+      ;; Padding shrinks with the text so the pill closes to nothing instead of an icon-sized stub
+      :style "padding: 5px ${round(12 * now_playing.reveal / 1000, 0)}px"
+      :space-evenly false
+      :tooltip {now_playing.artist == '' ? now_playing.title : now_playing.title + ' · ' + now_playing.artist}
+      (label
+        :class "now-playing-icon"
+        :visible {now_playing.reveal >= 400}
+        :text "${now_playing.source == 'spotify' ? '󰓇' : now_playing.source == 'youtube' ? '󰗃' : now_playing.source == 'browser' ? '󰖟' : '󰝚'}"
+      )
+      ;; unindent would strip the loop gap when it reaches the left edge
+      (label :class "now-playing-text" :text {substring(now_playing.text_view, 0, round(chars * now_playing.reveal / 1000, 0))} :xalign 0 :unindent false)
+    )
+)

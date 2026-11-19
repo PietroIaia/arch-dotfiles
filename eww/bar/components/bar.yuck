@@ -1,13 +1,14 @@
 (include "./bar/components/workspaces.yuck")
 (include "./bar/components/settings.yuck")
+(include "./bar/components/now-playing.yuck")
 
 ;; Main bar widget
-(defwidget bar [ws_start monitor]
+(defwidget bar [ws_start monitor np_chars]
   (centerbox
     :orientation "h"
     :class "taskbar"
     (workspaces :start ws_start :monitor monitor)
-    (box)
+    (now_playing :chars np_chars)
     (settings :monitor monitor)
   )
 )

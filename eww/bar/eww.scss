@@ -124,6 +124,33 @@ $input-radius: 3px;
   padding: 5px 10px;
 }
 
+/* Now-playing island; horizontal margin is the minimum gap to the neighbouring groups */
+.now-playing {
+  padding: 5px 12px;
+  margin: 0 32px;
+}
+
+// Read-only: cancel .widget:hover so it doesn't read as a button
+.widget.now-playing:hover {
+  background-color: $background-color;
+}
+
+.now-playing.paused {
+  opacity: 0.55;
+}
+
+.now-playing-icon {
+  font-family: "JetBrainsMono Nerd Font Mono";
+  font-size: $icon-size;
+  color: $accent-color;
+  margin-right: 10px;
+}
+
+// Monospace so the TEXT_CHARS window keeps one width while it scrolls
+.now-playing-text {
+  font-family: "JetBrainsMono Nerd Font Mono";
+}
+
 /* Network/WiFi bar button */
 .network {
   padding: 5px 10px;

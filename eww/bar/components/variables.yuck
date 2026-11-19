@@ -26,11 +26,15 @@
 (deflisten monitor1_workspace "~/.config/eww/scripts/hypr-monitor-ws.sh 1")
 (defpoll primary_bar_monitor :interval "1s" "hyprctl monitors -j | jq '(to_entries | .[] | select(.value.name == \"HDMI-A-1\") | .key) // (to_entries | .[] | select(.value.name == \"eDP-1\") | .key)'")
 (defpoll secondary_bar_monitor :interval "1s" "hyprctl monitors -j | jq 'if (map(.name) | contains([\"HDMI-A-1\"])) then (to_entries | .[] | select(.value.name == \"eDP-1\") | .key) else -1 end'")
+;; Now-playing island (event-driven via MPRIS on the session bus)
+(deflisten now_playing :initial '{"visible":false,"status":"","title":"","artist":"","source":"","text_view":"","reveal":0}' "~/.config/eww/scripts/now-playing.py")
 ;; Volume variables
 (defpoll volume :interval "100ms" "pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\\d+%' | head -1 | tr -d '%'")
 (defpoll volume_muted :interval "100ms" "pactl get-sink-mute @DEFAULT_SINK@ | grep -q 'yes' && echo 'true' || echo 'false'")
 ;; Battery variables
 (defpoll battery_percent :interval "5s" "cat /sys/class/power_supply/BAT0/capacity")
+;; Bar label text; width changes animate like the now-playing island
+(deflisten battery_label "~/.config/eww/scripts/tween-text.py 5 'echo $(cat /sys/class/power_supply/BAT0/capacity)%'")
 (defpoll battery_status :interval "1s" "cat /sys/class/power_supply/BAT0/status")
 (defpoll battery_charging_frame :interval "500ms" "echo $(( ($(date +%s) / 1) % 5 ))")
 (defpoll power_profile :interval "2s" "cat /sys/firmware/acpi/platform_profile")
@@ -38,6 +42,8 @@
 (defpoll wifi_enabled :interval "2s" "nmcli radio wifi")
 (defpoll wifi_connected :interval "2s" "nmcli -t -f DEVICE,TYPE,STATE device | grep -q 'wifi:connected' && echo 'yes' || echo 'no'")
 (defpoll wifi_ssid :interval "2s" "nmcli -t -f active,ssid device wifi | grep '^yes' | cut -d':' -f2")
+;; Bar label text; width changes animate like the now-playing island
+(deflisten wifi_ssid_label "~/.config/eww/scripts/tween-text.py 2 \"nmcli -t -e no -f active,ssid device wifi | sed -n 's/^yes://p'\"")
 (defpoll wifi_strength :interval "2s" "nmcli -t -f active,signal device wifi | grep '^yes' | cut -d':' -f2")
 (defpoll wifi_networks :interval "10s" :run-while "${wifi_prompt == ''}" "~/.config/eww/scripts/wifi-networks.sh")
 ;; Hex SSID whose password field is open; freezes wifi_networks, since a rebuild drops the typed text

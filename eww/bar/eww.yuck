@@ -81,7 +81,8 @@
   :stacking "fg"
   :exclusive true
   :focusable false
-  (bar :ws_start 1 :monitor primary_bar_monitor)
+  ;; Island width: 60 chars on the laptop panel, 100 on HDMI; this bar is on the laptop when no HDMI is attached
+  (bar :ws_start 1 :monitor primary_bar_monitor :np_chars {secondary_bar_monitor == -1 ? 60 : 100})
 )
 
 ;; Window definition for monitor 1 (workspaces 6-10)
@@ -96,6 +97,7 @@
   :stacking "fg"
   :exclusive true
   :focusable false
-  (bar :ws_start 6 :monitor secondary_bar_monitor)
+  ;; Always the laptop panel
+  (bar :ws_start 6 :monitor secondary_bar_monitor :np_chars 60)
 )
 
