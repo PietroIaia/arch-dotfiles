@@ -44,6 +44,7 @@ cat > "$EWW_OUT" <<EOF
 \$primary-color:            $C_PRIMARY;
 \$secondary-color:          $C_SECONDARY;
 \$background-color:         $C_BACKGROUND;
+\$view-bg-color:            $C_VIEW_BG;
 \$hover-color:              $C_HOVER;
 \$overlay-background-color: $C_OVERLAY_BACKGROUND;
 \$overlay-hover-color:      $C_OVERLAY_HOVER;

@@ -31,77 +31,34 @@
 
 ;; Popup widget with network details and controls
 (defwidget network_popup []
-  (box
-    :class "network-popup"
-    :orientation "v"
-    :space-evenly false
+  (connection_panel
+    :enabled "${wifi_enabled == 'enabled'}"
+    :toggle_onclick "nmcli radio wifi ${wifi_enabled == 'enabled' ? 'off' : 'on'}"
+    :list_label "Available Networks"
+    :list wifi_networks
+    :list_height 200
+    :disabled_text "WiFi is disabled"
+    :locked "${wifi_prompt != ''}"
     (box
-      :orientation "h"
-      :space-evenly false
-      (box
-        :class "network-current"
-        :orientation "h"
-        :space-evenly false
-        :hexpand true
-        :visible "${wifi_enabled == 'enabled'}"
-        (label
-          :class "network-current-name"
-          :text "${wifi_ssid}"
-          :halign "start"
-          :hexpand true
-        )
-        (label
-          :class "network-current-strength"
-          :text "${wifi_strength}%"
-          :halign "end"
-        )
-      )
-      (button
-        :class "network-toggle ${wifi_enabled == 'enabled' ? 'enabled' : 'disabled'}"
-        :onclick "nmcli radio wifi ${wifi_enabled == 'enabled' ? 'off' : 'on'}"
-        :halign "end"
-        (label :text "${wifi_enabled == 'enabled' ? '●' : '○'}")
+      :visible "${wifi_enabled == 'enabled' && wifi_connected == 'yes'}"
+      (connection_current
+        :onclick "~/.config/eww/scripts/wifi-action.sh disconnect"
+        :icon ""
+        :name wifi_ssid
+        :detail "${wifi_strength}%"
+        :pending "${wifi_pending == 'current'}"
+        :locked "${wifi_prompt != ''}"
       )
     )
-
-    ;; Separator
-    (box
-      :class "network-separator"
-      :visible "${wifi_enabled == 'enabled'}"
-    )
-
-    ;; Available networks list
-    (box
-      :class "network-list"
-      :orientation "v"
-      :space-evenly false
-      :visible "${wifi_enabled == 'enabled'}"
-
-      (label
-        :class "network-list-label"
-        :text "Available Networks"
-        :halign "start"
-      )
-
-      (scroll
-        :vscroll true
-        :hscroll false
-        :height 200
-        (literal :content wifi_networks)
-      )
-    )
-
-    ;; Disconnected message
-    (label
-      :class "network-disabled-msg"
-      :text "${wifi_enabled == 'disabled' ? 'WiFi is disabled' : 'Not connected'}"
-      :visible "${wifi_enabled == 'disabled' || wifi_connected == 'no'}"
+    (connection_empty
+      :text "Not connected to any network"
+      :visible "${wifi_enabled == 'enabled' && wifi_connected == 'no'}"
     )
   )
 )
 
-;; Popup window definition
-(defwindow network-window
+;; Popup window definition; reopens use the no-animation namespace (hyprland.lua layer rule)
+(defwindow network-window [focus animate]
   :geometry (geometry
     :x "5px"
     :y "5px"
@@ -110,6 +67,7 @@
   )
   :stacking "overlay"
   :exclusive false
-  :focusable false
+  :focusable focus
+  :namespace "${animate ? 'eww-network' : 'eww-network-instant'}"
   (network_popup)
 )

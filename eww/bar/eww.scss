@@ -5,6 +5,8 @@
 @import "_palette";
 
 $icon-size: 16px;
+// Breeze field radius, as in the Retroma GTK3 theme
+$input-radius: 3px;
 
 .taskbar {
   font-size: 12px;
@@ -122,19 +124,11 @@ $icon-size: 16px;
   padding: 5px 10px;
 }
 
-/* Network/WiFi widget styles */
+/* Network/WiFi bar button */
 .network {
   padding: 5px 10px;
   font-size: 16px;
   color: $accent-color;
-}
-
-.network-popup {
-  background-color: $overlay-background-color;
-  border: 2px solid $border-color;
-  border-radius: $border-radius;
-  padding: 15px;
-  min-width: 300px;
 }
 
 .network-title {
@@ -144,7 +138,27 @@ $icon-size: 16px;
   color: $fg-color;
 }
 
-.network-toggle {
+/* Bluetooth bar button */
+.bluetooth {
+  padding: 5px 10px;
+  font-size: 16px;
+  color: $accent-color;
+}
+
+.bluetooth.off {
+  color: $fg-muted-color;
+}
+
+/* Connection panel (network and Bluetooth popups) */
+.connection-panel {
+  background-color: $overlay-background-color;
+  border: 2px solid $border-color;
+  border-radius: $border-radius;
+  padding: 15px;
+  min-width: 300px;
+}
+
+.connection-toggle {
   padding: 5px 10px;
   font-size: 18px;
   min-width: 30px;
@@ -154,111 +168,214 @@ $icon-size: 16px;
   transition: all 0.2s ease;
 }
 
-.network-toggle.enabled {
+.connection-toggle.enabled {
   color: #2ECC71;
   border-color: #2ECC71;
 }
 
-.network-toggle.disabled {
+.connection-toggle.disabled {
   color: #E74C3C;
   border-color: #E74C3C;
 }
 
-.network-toggle:hover {
+.connection-toggle:hover {
   background-color: $overlay-hover-color;
   border-color: $primary-color;
 }
 
-.network-status {
-  padding: 10px 0;
-}
-
-.network-current-label {
-  font-size: 12px;
-  color: $fg-muted-color;
-  margin-bottom: 5px;
-}
-
-.network-current {
+.connection-current {
   background-color: $secondary-color;
   border: 1px solid $primary-color;
   border-radius: $border-radius;
   padding: 8px 12px;
   margin-right: 5px;
   color: $primary-color;
+  transition: all 0.2s ease;
 }
 
-.network-current-name {
+.connection-current:hover {
+  background-color: $overlay-hover-color;
+}
+
+.connection-current.empty {
+  background-color: transparent;
+  border-color: transparent;
+  color: $fg-muted-color;
+  font-size: 12px;
+}
+
+.connection-current-icon {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.connection-current-name {
   font-size: 12px;
   font-weight: bold;
 }
 
-.network-current-strength {
+.connection-current-detail {
   font-size: 14px;
   color: $primary-color;
 }
 
-.network-separator {
+.connection-separator {
   min-height: 1px;
   background-color: $border-color;
   margin: 10px 0;
 }
 
-.network-list {
+.connection-list {
   padding-top: 5px;
 }
 
-.network-list-label {
+.connection-list-label {
   font-size: 12px;
   color: $fg-muted-color;
   margin-bottom: 8px;
 }
 
-.network-item {
+.connection-item {
   margin: 2px 0;
 }
 
-.network-item.connected {
-  opacity: 0.5;
-}
-
-.network-connect {
+.connection-connect {
   padding: 8px 10px;
   border-radius: $border-radius;
   border: 1px solid transparent;
   transition: all 0.2s ease;
 }
 
-.network-connect:hover {
+.connection-connect:hover {
   background-color: $overlay-hover-color;
   border-color: $primary-color;
 }
 
-.network-icon {
+.connection-icon {
   font-size: 14px;
   color: $accent-color;
   margin-right: 15px;
 }
 
-.network-name {
+.connection-lock {
+  font-size: 12px;
+  margin: 0 5px;
+  min-width: 15px;
+}
+
+.connection-name {
   font-size: 13px;
   color: $fg-color;
 }
 
-.network-lock {
-  font-size: 12px;
-  margin: 0 5px;
-}
-
-.network-signal {
+.connection-signal {
   font-size: 12px;
   color: $primary-color;
 }
 
-.network-disabled-msg {
+.connection-empty {
+  font-size: 12px;
+  color: $fg-muted-color;
+  padding: 10px;
+}
+
+/* Dimmed only while a password field is open; rows locked by a running action keep full opacity */
+.connection-panel.locked .connection-connect:disabled,
+.connection-panel.locked .connection-current:disabled,
+.connection-panel.locked .connection-toggle:disabled {
+  opacity: 0.4;
+}
+
+/* Prompted row plus its password field */
+.connection-group.prompting {
+  background-color: $secondary-color;
+  border: 1px solid $primary-color;
+  border-radius: $border-radius;
+  margin: 2px 0;
+}
+
+.connection-group.prompting .connection-connect:disabled {
+  opacity: 1;
+}
+
+.connection-prompt {
+  padding: 0 10px 10px 10px;
+}
+
+/* Same as the Retroma GTK3 theme's entry (polkit prompt, Dolphin): invisible border at rest */
+.connection-password {
+  background-color: $view-bg-color;
+  border: 1px solid $view-bg-color;
+  border-radius: $input-radius;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: $fg-color;
+  transition: all 0.2s ease;
+}
+
+.connection-password:hover {
+  border-color: $primary-color;
+}
+
+.connection-password:focus,
+.connection-password:focus:hover {
+  border-color: $accent-color;
+}
+
+.connection-password selection {
+  background-color: $primary-color;
+  color: $secondary-color;
+}
+
+.connection-prompt-cancel {
+  padding: 4px 10px;
+  border-radius: $border-radius;
+  border: 1px solid transparent;
+  color: $fg-muted-color;
+  transition: all 0.2s ease;
+}
+
+.connection-prompt-cancel:hover {
+  background-color: $overlay-hover-color;
+  border-color: $primary-color;
+  color: $fg-color;
+}
+
+.connection-prompt-hint {
+  font-size: 11px;
+  color: $fg-muted-color;
+  margin-top: 6px;
+}
+
+.connection-prompt-hint.error {
+  color: $urgent-color;
+}
+
+.connection-disabled-msg {
   font-size: 14px;
   color: $fg-muted-color;
-  padding: 20px;
+  padding-left: 12px;
+}
+
+/* Pulsing three-dot indicator for in-flight actions */
+@keyframes loading-dot {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+.loading-dots .dot.active {
+  font-size: 16px;
+  color: $primary-color;
+  animation: loading-dot 1.2s ease-in-out infinite;
+}
+
+.loading-dots .dot.active:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots .dot.active:nth-child(3) {
+  animation-delay: 0.4s;
 }
 
 /* Power overlay styles */

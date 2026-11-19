@@ -1,5 +1,7 @@
 ;; Popup state
 (defvar popup_open "none")
+;; Screen of the open popup, so scripts can reopen it
+(defvar popup_screen 0)
 
 ;; Notification slots — each holds one notification (JSON object) or "{}" when empty.
 ;; Geometry per slot is set by the daemon at open time via `eww open --pos --size`,
@@ -37,4 +39,15 @@
 (defpoll wifi_connected :interval "2s" "nmcli -t -f DEVICE,TYPE,STATE device | grep -q 'wifi:connected' && echo 'yes' || echo 'no'")
 (defpoll wifi_ssid :interval "2s" "nmcli -t -f active,ssid device wifi | grep '^yes' | cut -d':' -f2")
 (defpoll wifi_strength :interval "2s" "nmcli -t -f active,signal device wifi | grep '^yes' | cut -d':' -f2")
-(defpoll wifi_networks :interval "10s" "~/.config/eww/scripts/wifi-networks.sh")
+(defpoll wifi_networks :interval "10s" :run-while "${wifi_prompt == ''}" "~/.config/eww/scripts/wifi-networks.sh")
+;; Hex SSID whose password field is open; freezes wifi_networks, since a rebuild drops the typed text
+(defvar wifi_prompt "")
+(defvar wifi_prompt_error "")
+;; Bluetooth variables (timeout: bluetoothctl waits forever when bluetoothd is down)
+(defpoll bt_powered :interval "2s" "timeout 1 bluetoothctl show 2>/dev/null | grep -q 'Powered: yes' && echo yes || echo no")
+(defpoll bt_devices :interval "5s" "~/.config/eww/scripts/bluetooth-devices.sh")
+(defpoll bt_connected :interval "2s" "~/.config/eww/scripts/bluetooth-connected.sh")
+;; MAC of the device with a connect/disconnect in flight; set and cleared by bluetooth-action.sh
+(defvar bt_pending "")
+;; Hex SSID being connected, or "current" while disconnecting; set and cleared by wifi-action.sh
+(defvar wifi_pending "")

@@ -34,11 +34,16 @@ else
     if [ "$CURRENT" != "none" ]; then
         eww close "$CURRENT" 2>/dev/null
     fi
-    eww update popup_open="$POPUP"
+    eww update popup_open="$POPUP" popup_screen="$SCREEN"
+    OPEN_ARGS=()
     if [ "$POPUP" = "calendar-window" ]; then
         ~/.config/eww/scripts/cal-nav.sh reset
+    elif [ "$POPUP" = "network-window" ]; then
+        # Opens without a password field, so without a keyboard grab.
+        eww update wifi_prompt= wifi_prompt_error=
+        OPEN_ARGS=(--arg focus=false --arg animate=true)
     fi
-    eww open "$POPUP" --screen "$SCREEN"
+    eww open "$POPUP" --screen "$SCREEN" "${OPEN_ARGS[@]}"
     eww open click-catcher-0 --screen 0 2>/dev/null
     eww open click-catcher-1 --screen 1 2>/dev/null
 fi

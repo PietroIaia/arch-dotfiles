@@ -28,7 +28,7 @@
         :space-evenly true
         (button
           :class "power-option"
-          :onclick "~/.config/eww/scripts/close-popup.sh && systemctl poweroff"
+          :onclick "~/.config/eww/scripts/close-popup.sh systemctl poweroff"
           (box
             :orientation "v"
             :space-evenly false
@@ -38,7 +38,7 @@
         )
         (button
           :class "power-option"
-          :onclick "~/.config/eww/scripts/close-popup.sh && systemctl reboot"
+          :onclick "~/.config/eww/scripts/close-popup.sh systemctl reboot"
           (box
             :orientation "v"
             :space-evenly false
@@ -54,7 +54,7 @@
 
         (button
           :class "power-option"
-          :onclick "~/.config/eww/scripts/close-popup.sh && systemctl suspend"
+          :onclick "~/.config/eww/scripts/close-popup.sh systemctl suspend"
           (box
             :orientation "v"
             :space-evenly false
@@ -64,7 +64,7 @@
         )
         (button
           :class "power-option"
-          :onclick "~/.config/eww/scripts/close-popup.sh && hyprctl dispatch 'hl.dsp.exit()'"
+          :onclick "~/.config/eww/scripts/close-popup.sh hyprctl dispatch 'hl.dsp.exit()'"
           (box
             :orientation "v"
             :space-evenly false

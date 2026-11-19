@@ -1,0 +1,178 @@
+;; Connection Panel
+;; Shared pieces of the network and Bluetooth popups: toggle, current connections, available list
+
+;; Pulsing dots; text swaps instead of :visible because literal widgets created hidden never reappear
+(defwidget loading_dots [active]
+  (box
+    :class "loading-dots"
+    :space-evenly false
+    (label :class "dot ${active ? 'active' : ''}" :text "${active ? ' •' : ''}")
+    (label :class "dot ${active ? 'active' : ''}" :text "${active ? ' •' : ''}")
+    (label :class "dot ${active ? 'active' : ''}" :text "${active ? ' •' : ''}")
+  )
+)
+
+;; Highlighted current connection; clicking it disconnects
+(defwidget connection_current [onclick icon name detail pending locked]
+  (button
+    :class "connection-current"
+    :onclick onclick
+    :active "${!locked}"
+    (box
+      :orientation "h"
+      :space-evenly false
+      (label
+        :class "connection-current-icon"
+        :text icon
+        :visible "${icon != ''}"
+      )
+      (label
+        :class "connection-current-name"
+        :text name
+        :halign "start"
+        :hexpand true
+        :limit-width 22
+      )
+      (label
+        :class "connection-current-detail"
+        :text "${pending ? '' : detail}"
+      )
+      (loading_dots :active pending)
+    )
+  )
+)
+
+;; Muted placeholder shown in place of the current connections
+(defwidget connection_empty [text visible]
+  (label
+    :class "connection-current empty"
+    :text text
+    :xalign 0
+    :vexpand true
+    :visible visible
+  )
+)
+
+;; locked: insensitive, so neither clickable nor focusable while a password field is open
+(defwidget connection_toggle [enabled onclick locked]
+  (button
+    :class "connection-toggle ${enabled ? 'enabled' : 'disabled'}"
+    :onclick onclick
+    :active "${!locked}"
+    :halign "end"
+    :valign "start"
+    (label :text "${enabled ? '●' : '○'}")
+  )
+)
+
+;; One available connection; emitted by the list scripts inside a literal
+;; secured: "yes"/"no" keeps a lock column so names align; "" (no such concept) drops it
+(defwidget connection_item [onclick icon secured name detail pending locked]
+  (box
+    :class "connection-item"
+    :orientation "h"
+    :space-evenly true
+    (button
+      :class "connection-connect"
+      :onclick onclick
+      :active "${!locked}"
+      (box
+        :orientation "h"
+        :space-evenly false
+        (label :class "connection-icon" :text icon)
+        (label :class "connection-lock" :text "${secured == 'yes' ? '🔒' : ''}" :visible "${secured != ''}")
+        (label
+          :class "connection-name"
+          :text name
+          :halign "start"
+          :hexpand true
+          :limit-width 28
+        )
+        (label
+          :class "connection-signal"
+          :text "${pending ? '' : detail}"
+        )
+        (loading_dots :active pending)
+      )
+    )
+  )
+)
+
+;; Inline password field under a list row; Enter submits, and the typed text never enters yuck
+(defwidget connection_prompt [onaccept oncancel error]
+  (box
+    :class "connection-prompt"
+    :orientation "v"
+    :space-evenly false
+    (box
+      :orientation "h"
+      :space-evenly false
+      :spacing 6
+      (input
+        :class "connection-password"
+        :password true
+        :hexpand true
+        :onaccept onaccept
+      )
+      (button
+        :class "connection-prompt-cancel"
+        :onclick oncancel
+        (label :text "✕")
+      )
+    )
+    (label
+      :class "connection-prompt-hint ${error != '' ? 'error' : ''}"
+      :xalign 0
+      :text "${error != '' ? error : 'Press Enter to connect'}"
+    )
+  )
+)
+
+;; Popup body; children are the header's current connections and empty state, replaced by disabled_text when off
+(defwidget connection_panel [enabled toggle_onclick list_label list list_height disabled_text locked]
+  (box
+    :class "connection-panel ${locked ? 'locked' : ''}"
+    :orientation "v"
+    :space-evenly false
+    (box
+      :orientation "h"
+      :space-evenly false
+      (box
+        :orientation "v"
+        :space-evenly false
+        :spacing 4
+        :hexpand true
+        :valign "center"
+        (children)
+        (label
+          :class "connection-disabled-msg"
+          :text disabled_text
+          :xalign 0
+          :visible "${!enabled}"
+        )
+      )
+      (connection_toggle :enabled enabled :onclick toggle_onclick :locked locked)
+    )
+    (box
+      :class "connection-separator"
+      :visible enabled
+    )
+    (box
+      :class "connection-list"
+      :orientation "v"
+      :space-evenly false
+      :visible enabled
+      (label
+        :class "connection-list-label"
+        :text list_label
+        :halign "start"
+      )
+      (scroll
+        :vscroll true
+        :hscroll false
+        :height list_height
+        (literal :content list)
+      )
+    )
+  )
+)

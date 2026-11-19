@@ -294,6 +294,15 @@ hl.window_rule({
     center = true,
 })
 
+-- eww re-opens the network pop-up to move the keyboard into its password field;
+-- fading that swap out and back in reads as a flicker, so re-opened surfaces map instantly.
+hl.layer_rule({
+    name  = "eww-network-instant",
+    match = { namespace = "^eww-network-instant$" },
+
+    no_anim = true,
+})
+
 -- Rofi-style corners on dialogs and every other floating window.
 hl.window_rule({
     name  = "popup-rounding",

@@ -1,0 +1,59 @@
+;; Bluetooth Widget
+;; Displays adapter power in the bar and provides a popup with nearby devices
+
+;; Main Bluetooth button widget that appears in the settings bar
+(defwidget bluetooth_button [monitor]
+  (button
+    :class "widget bluetooth ${bt_powered == 'yes' ? '' : 'off'} ${popup_open == 'bluetooth-window' ? 'active' : ''}"
+    :onclick "~/.config/eww/scripts/toggle-popup.sh bluetooth-window ${monitor}"
+    (label
+      :text "${bt_powered == 'yes' ? '󰂯' : '󰂲'}"
+    )
+  )
+)
+
+;; Popup widget with power toggle, connected devices and nearby devices
+(defwidget bluetooth_popup []
+  (connection_panel
+    :enabled "${bt_powered == 'yes'}"
+    :toggle_onclick "~/.config/eww/scripts/bluetooth-action.sh power ${bt_powered == 'yes' ? 'off' : 'on'}"
+    :list_label "Available Devices"
+    :list bt_devices
+    :list_height 260
+    :disabled_text "Bluetooth is off"
+    :locked false
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 4
+      (for d in bt_connected
+        (connection_current
+          :onclick "~/.config/eww/scripts/bluetooth-action.sh disconnect ${d.mac}"
+          :icon "${d.icon}"
+          :name "${d.name}"
+          :detail ""
+          :pending "${bt_pending == d.mac}"
+          :locked false
+        )
+      )
+    )
+    (connection_empty
+      :text "No devices connected"
+      :visible "${bt_powered == 'yes' && arraylength(bt_connected) == 0}"
+    )
+  )
+)
+
+;; Popup window definition
+(defwindow bluetooth-window
+  :geometry (geometry
+    :x "5px"
+    :y "5px"
+    :width "300px"
+    :anchor "top right"
+  )
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (bluetooth_popup)
+)
